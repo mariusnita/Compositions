@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="Composition.js"></script>
+    <script type="text/javascript" src="Main.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(Main.ready);
+    </script>
+
+    <style type="text/css"> 
+      a { color: #666; cursor: pointer; }
+      body { background-color: #111; text-align: center;padding-top: 50px;padding-bottom:50px; color: #666;}
+    </style>
+  </head>
+  <body>
+    <p id="tests"></p>
+    <p>
+      <input id="exc" type="checkbox" checked="checked" onclick="Main.setExclusive(this.checked)"/>
+      <label for="exc">exclusive</label>
+    </p>
+    <canvas id="myCanvas" width="800" height="800" style="cursor:pointer;"></canvas>
+  </body>
+</html>
