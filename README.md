@@ -1,4 +1,4 @@
-A series of <canvas>-based JS animations.
+A series of &lt;canvas&gt;-based JS animations.
 
 Marius Nita
 mariusnita.com
