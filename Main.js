@@ -49,15 +49,19 @@ Main.run = function(x) {
     }
 
     if (Main.exclusive) {
-        var vals = Main.values(Main.objs);        
-        for (var y = 0; y < vals.length; ++y) { 
-            if (typeof vals[y] == 'object') {
-                vals[y].stop();
-            }
-        }
+        Main.stopAll();
     }
 
     Main.objs['Composition' + x].run();
+};
+
+Main.stopAll = function() {
+    var vals = Main.values(Main.objs);        
+    for (var y = 0; y < vals.length; ++y) { 
+        if (typeof vals[y] == 'object') {
+            vals[y].stop();
+        }
+    }
 };
 
 Main.setExclusive = function(t) {
