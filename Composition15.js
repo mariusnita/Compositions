@@ -6,19 +6,20 @@ Composition15.prototype = clone(Composition.prototype);
 
 Composition15.prototype.runFunc = function(white, black) {
     var decisionFuncX = function(x) {
+        var w = this.ctx.canvas.width;
         //return Math.ceil(Math.random() * 800) % 100 < Math.sqrt(x) ;
 
-        if (x > 400)
-            x = 800-x;
+        if (x > w / 2)
+            x = w - x;
 
-        if (x > 190 && x < 410)
-            x = 400 - x;
-        if (x > 410 && x < 610)
-            x = x - 400;
+        if (x > w / 4 && x <= w / 2)
+            x = w / 2 - x;
+        if (x > w / 2 && x <= w * (1/2 + 1/4))
+            x = x - w / 2;
 
         var s = Math.sqrt(x);
         return Math.floor(s) == s;
-    };
+    }.bind(this);
 
     var decisionFuncY = decisionFuncX;
 
@@ -37,9 +38,9 @@ Composition15.prototype.runFunc = function(white, black) {
 
     var lastX = -1, lastY = -1;
 
-    for (var x = 0; x < 800; ++x) {
+    for (var x = 0; x < this.ctx.canvas.width; ++x) {
         if (decisionFuncX(x)) {
-            for (var y = 0; y < 800; ++y) {
+            for (var y = 0; y < this.ctx.canvas.height; ++y) {
                 if (decisionFuncY(y)) {
                     if (lastX >= 0 && lastY >= 0) {
                         this.fillRect(lastX, lastY, x, y, color);
