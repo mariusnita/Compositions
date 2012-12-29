@@ -57,19 +57,17 @@ Composition15.prototype.runFunc = function(white, black) {
 };
 
 Composition15.prototype.mixColor = function(i,j,k,itup) {
-    return 'rgb(' + i%itup + ',' + j%itup + ',' + ((k)% itup) + ')';
-    return 'rgb(' + k + ',' + k + ',' + ((k*k)% itup) + ')';
-    //return 'rgb(255,255,255)';
+    return 'rgb(' + i + ',' + j + ',' + k + ')';
 };
 
 Composition15.prototype.doNext = function() {
     this.runFunc(this.getColor(),this.getColor());
-    this.setTimeout(this.objectExpr() + '.doNext()', 100);
+    this.setTimeout(this.objectExpr() + '.doNext()', 150);
 };
 
 Composition15.prototype.run = function() {
     this.blank();
-    this.computeColors(200,240,1);
+    this.computeColors(40,120,10);
 
     this.doNext();
 };
