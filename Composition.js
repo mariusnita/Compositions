@@ -83,6 +83,7 @@ Composition.prototype.drawLine = function(x1,y1,x2,y2,color) {
     }
     var oldC = this.ctx.strokeStyle;
     this.ctx.strokeStyle = color;
+    this.ctx.lineWidth = 1;
     this.ctx.beginPath();
     this.ctx.moveTo(x1,y1);
     this.ctx.lineTo(x2,y2);
@@ -91,10 +92,14 @@ Composition.prototype.drawLine = function(x1,y1,x2,y2,color) {
 };
 
 Composition.prototype.drawPoint = function(x,y,color) {
+    this.fillRect(x,y,1,1,color);
+};
+
+Composition.prototype.fillRect = function(x1, y1, x2, y2, color) {
     color = this.getColorOrDefault(color);
     this.ctx.fillStyle = color;
-    this.ctx.fillRect(x,y,1,1);
-}
+    this.ctx.fillRect(x1,y1,x2,y2);
+};
 
 Composition.prototype.getColorOrDefault = function(color) {
     if (typeof color == 'undefined') {

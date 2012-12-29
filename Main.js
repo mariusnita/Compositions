@@ -1,6 +1,6 @@
 var Main = {};
 
-Main.files = ['1','3','4','5','6','7','8','9','10','11','12', '13','14'];
+Main.files = ['1','4','5','6','7','8','9','10','11','12', '13','14','15'];
 
 Main.keys = function(obj) {
     var keys = [];
@@ -25,7 +25,7 @@ Main.values = function (obj) {
     return vals;
 };
 
-Main.loadJs = function(filename) { 
+Main.loadJs = function(filename) {
     var fileref = document.createElement('script');
     fileref.setAttribute("type","text/javascript");
     fileref.setAttribute("src", filename);
@@ -42,8 +42,15 @@ Main.exclusive = true;
 Main.run = function(x) {
     var key = 'Composition'+x;
 
-    if (typeof Main.objs['Composition' + x] == 'undefined') {
-        var t = eval("new Composition" + x + "(Main.getContext())");
+    if (typeof Main.objs[key] == 'undefined') {
+        console.log('here');
+        console.log(window[key]);
+        console.log(window);
+        console.log(window.Composition1);
+        var comp = window[key];
+        var t = new window[key](Main.getContext());
+        //var t = eval("new Composition" + x + "(Main.getContext())");
+        console.log('here again');
         Main.objs['Composition' + x] = t;
     }
 
@@ -70,5 +77,12 @@ Main.ready = function() {
         html.push('<a onclick="Main.run(' + Main.files[x] + ');">' + (x+1) + '</a>');
     }
     $('#tests').html(html.join("&nbsp;&nbsp;"));
+};
+
+Main.runOne = function(i) {
+    //Main.loadJs();
+    $.getScript('Compositions/Composition' + Main.files[i] + '.js', function() {
+        Main.run(Main.files[i]);
+    });
 };
 
