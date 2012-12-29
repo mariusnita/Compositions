@@ -1,6 +1,6 @@
 var Main = {};
 
-Main.files = ['1','4','5','6','7','8','9','10','11','12', '13','14','15'];
+Main.files = ['4','5','6','7','11','12', '13','14','15'];
 
 Main.keys = function(obj) {
     var keys = [];
@@ -43,27 +43,25 @@ Main.run = function(x) {
     var key = 'Composition'+x;
 
     if (typeof Main.objs[key] == 'undefined') {
-        console.log('here');
-        console.log(window[key]);
-        console.log(window);
-        console.log(window.Composition1);
         var comp = window[key];
         var t = new window[key](Main.getContext());
-        //var t = eval("new Composition" + x + "(Main.getContext())");
-        console.log('here again');
         Main.objs['Composition' + x] = t;
     }
 
     if (Main.exclusive) {
-        var vals = Main.values(Main.objs);        
-        for (var y = 0; y < vals.length; ++y) { 
-            if (typeof vals[y] == 'object') {
-                vals[y].stop();
-            }
-        }
+        Main.stopAll();
     }
 
     Main.objs['Composition' + x].run();
+};
+
+Main.stopAll = function() {
+    var vals = Main.values(Main.objs);        
+    for (var y = 0; y < vals.length; ++y) { 
+        if (typeof vals[y] == 'object') {
+            vals[y].stop();
+        }
+    }
 };
 
 Main.setExclusive = function(t) {
@@ -78,11 +76,3 @@ Main.ready = function() {
     }
     $('#tests').html(html.join("&nbsp;&nbsp;"));
 };
-
-Main.runOne = function(i) {
-    //Main.loadJs();
-    $.getScript('Compositions/Composition' + Main.files[i] + '.js', function() {
-        Main.run(Main.files[i]);
-    });
-};
-
