@@ -8,10 +8,11 @@ function clone(obj) {
 function Composition(ctx) {
     this.ctx = ctx;
     this.objectName = Composition.nextObjectName();
-    this.colors = ['#fff','#aaa','#333','#bbb'];
+    this.colors = null; //['#fff','#aaa','#333','#bbb'];
     this.idx = 0;
     this.timeouts = [];
     Composition.objects[this.objectName] = this;
+    this.computeColorsDefault();
 }
 
 Composition.objects = {};
