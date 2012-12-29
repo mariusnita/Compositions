@@ -9,12 +9,13 @@ Composition15.prototype.runFunc = function(white, black) {
         var w = this.ctx.canvas.width;
         //return Math.ceil(Math.random() * 800) % 100 < Math.sqrt(x) ;
 
-        if (x > w / 2)
+        if (x > w/2)
             x = w - x;
 
-        if (x > w / 4 && x <= w / 2)
+        if (x > w/4 + 10 && x <= w/2 + 10)
             x = w / 2 - x;
-        if (x > w / 2 && x <= w * (1/2 + 1/4))
+
+        if (x > w/2 + 10 && x <= w * (1/2 + 1/4) + 10)
             x = x - w / 2;
 
         var s = Math.sqrt(x);
