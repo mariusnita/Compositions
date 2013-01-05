@@ -193,7 +193,7 @@ Composition15.prototype.doCircle = function(x) {
 
 Composition15.prototype.runCircle = function(max) {
     for (var x = 1; x <= max; ++x) {
-        setTimeout(this.objectExpr() + '.doCircle(' + x + ')', 10 * x * (Math.sqrt(x/100)));
+        this.setTimeout(this.objectExpr() + '.doCircle(' + x + ')', 10 * x * (Math.sqrt(x/100)));
     }
 };
 
@@ -212,7 +212,7 @@ Composition15.prototype.run = function() {
         this.fillCircle(rect.p1.x, rect.p1.y, 1, 'blue');
     }.bind(this));
 
-    setTimeout(function() { this.runCircle(max); }.bind(this), 3000);
+    this.setTimeout(function() { this.runCircle(max); }.bind(this), 3000);
 
-    setTimeout(function() { this.doNext(); }.bind(this), (10 * max * 2) + 6000);
+    this.setTimeout(function() { this.doNext(); }.bind(this), (10 * max * 2) + 6000);
 };
