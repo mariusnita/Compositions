@@ -65,7 +65,7 @@ Composition.prototype.blank = function(color) {
         color = '#111111';
     }
     this.ctx.fillStyle=color;
-    this.ctx.fillRect(0,0,800,800);    
+    this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height);    
 };
 
 Composition.prototype.setEndCallback = function(f) {
