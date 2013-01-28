@@ -5,14 +5,16 @@ function clone(obj) {
     }
 }
 
-function Composition(ctx) {
-    this.ctx = ctx;
+function Composition(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext("2d");
     this.objectName = Composition.nextObjectName();
     this.colors = null; //['#fff','#aaa','#333','#bbb'];
     this.idx = 0;
     this.timeouts = [];
     Composition.objects[this.objectName] = this;
     this.computeColorsDefault();
+    this.stopped = true;
 }
 
 Composition.objects = {};
@@ -102,6 +104,13 @@ Composition.prototype.fillRect = function(x1, y1, x2, y2, color) {
     this.ctx.fillRect(x1,y1,x2,y2);
 };
 
+Composition.prototype.strokeRect = function(x1, y1, x2, y2, color) {
+    color = this.getColorOrDefault(color);
+    this.ctx.strokeStyle = color;
+    this.ctx.lineWidth = 1;
+    this.ctx.strokeRect(x1,y1,x2,y2);
+};
+
 Composition.prototype.getColorOrDefault = function(color) {
     if (typeof color == 'undefined') {
         return this.getColor();
@@ -122,6 +131,11 @@ Composition.prototype.fillCircle = function(x,y,size,color) {
     this.ctx.fill();
 };
 
+Composition.prototype.randomColor = function() {
+    var idx = Math.random() * this.colors.length;
+    return this.colors[Math.floor(idx)];
+};
+
 // deprecated
 Composition.prototype.drawCircle = Composition.prototype.fillCircle;
 
@@ -137,6 +151,7 @@ Composition.prototype.stop = function() {
     for (var x = 0; x < this.timeouts.length; ++x) {
         clearTimeout(this.timeouts[x]);
     }
+    this.stopped = true;
     this.idx = 0;
     this.timeouts = [];
 };
@@ -157,6 +172,22 @@ Composition.seq = function (ts) {
     }
     ts[0].run();
 };
+
+Composition.prototype.getMousePos = function(evt) {
+    var rect = this.canvas.getBoundingClientRect();
+    return {
+        x: evt.clientX - rect.left,
+        y: evt.clientY - rect.top
+    };
+};
+
+Composition.prototype.listenToMouse = function(f) {
+    this.canvas.addEventListener('mousemove', function(evt) {
+        var mousePos = this.getMousePos(evt);
+        f(mousePos);
+    }.bind(this), false);
+};
+
 
 
 

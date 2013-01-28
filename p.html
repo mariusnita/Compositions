@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="Composition.js"></script>
+    <script type="text/javascript" src="Composition22.js"></script>
+
+    <script type="text/javascript">
+      var anim = null;
+      var opts = {};
+
+      function hideCover() {
+        $('.what').hide();
+        $('#coverImg').hide();
+        $('#myCanvas').show();
+      }
+
+      function what() {
+        $('.what').show();
+      }
+
+      var names = {
+        play : ['play','pause'],
+        distrib : ['spread','focal'],
+        cols : ['colors','mono'],
+        flyToTheLight : ['attract','radiate']
+      }
+
+      $(document).ready(function() {
+        $('#coverImg,.what').click(function() { hideCover(); restart() });
+        var canvas = document.getElementById("myCanvas");
+        anim = new Composition22(canvas);
+        anim.init();
+        for (var k in names) {
+          $('#' + k).html(names[k][0]);
+        }
+        $(document).on('keydown',document,function(evt) {
+          if (evt.keyCode === 83) { // p
+            startStop();
+          }
+          if (evt.keyCode === 82) { // r
+            restart();
+          }
+          if (evt.keyCode === 67) { // c
+            cols();
+          }
+          if (evt.keyCode === 65) { // a
+            flyToTheLight();
+          }
+        });
+      });
+      var started = false;
+      function startStop() {
+        hideCover();
+        if (started) { anim.stop(); }
+        else { anim.run(); }
+        started = !started;
+        $('#play').html(names.play[0 + started]);
+      }
+      function doOpt(prop,dontStop) {
+        var dist = (opts[prop] === true);
+        opts[prop] = !opts[prop];
+        $('#' + prop).html(names[prop][0+opts[prop]]);
+        anim.setOpts(opts);
+      }
+      function restart() {
+        hideCover();
+        var type = $('input[name=restart_type]:checked').val();
+        started = false;
+        anim.stop();
+        opts.distrib = type === 'cover';
+        anim.setOpts(opts);
+        anim.init();
+        startStop();
+      }
+      function cols() {
+        doOpt('cols',true);
+      }
+      function flyToTheLight() {
+        doOpt('flyToTheLight',true);
+      }
+    </script>
+
+    <style type="text/css"> 
+      .opt {
+        width: 80px;
+        height: 80px;
+        padding: 10px;
+        margin: 10px;
+        background-color: #222;
+        cursor: pointer;
+      }
+      a {
+        color: #666; 
+        cursor: pointer; 
+      }
+      body { 
+        font-family: courier;
+        font-size: 12px;
+        background-color: #111; 
+        text-align: center;
+        padding-top: 50px;
+        padding-bottom:50px; 
+        color: #666;
+      }
+      .what {
+        display:none;
+        width: 630px;
+        top: 50%;
+        left: 50%;
+        margin-top: -300px;
+        margin-left: -315px;
+        background-color: rgba(0,0,0,0.85);
+        position: absolute;
+        padding: 20px;
+        text-align: left;
+        font-size: 14px;
+        line-height: 20px;
+
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <tr style="vertical-align: top;">
+        <td style="100px">
+          <div class="opt" onclick="restart()">
+            restart (r)
+            <div style="text-align: left;margin-top:5px">
+              <input id="b2" type="radio" name="restart_type" value="focal" checked="checked"></input>
+              <label for="b2">focal</label><br/>
+              <input id="b1" type="radio" name="restart_type" value="cover"></input>
+              <label for="b1">cover</label>
+            </div>
+          </div>
+          <div class="opt" onclick="startStop()">
+            <span id="play"></span> (s)
+          </div>
+          <div class="opt" onclick="cols()">
+            <span id="cols"></span> (c)
+          </div>
+          <div class="opt" onclick="flyToTheLight()">
+            <span id="flyToTheLight"></span> (a)
+          </div>
+          <!-- <div class="opt" onclick="what()"> -->
+          <!--   what -->
+          <!-- </div> -->
+        </td>
+        <td>
+          <div style="position: relative;">
+            <img id="coverImg" src="cover.png" style="cursor: pointer;"/>
+            <canvas id="myCanvas" width="1300" height="800" style="cursor:crosshair;display:none;"></canvas>
+            <div class="what">
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

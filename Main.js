@@ -1,6 +1,6 @@
 var Main = {};
 
-Main.files = ['4','5','6','7','11','12', '13','14','15'];
+Main.files = ['4','5','6','7','11','12', '13','14','15','16','17','18','19','20','21','22'];
 
 Main.keys = function(obj) {
     var keys = [];
@@ -32,8 +32,9 @@ Main.loadJs = function(filename) {
     document.body.appendChild(fileref);
 };
 
-Main.getContext = function() { 
-    return document.getElementById("myCanvas").getContext("2d"); 
+Main.getCanvas = function() { 
+    var canvas = document.getElementById("myCanvas");
+    return canvas;
 };
 
 Main.objs = {};
@@ -44,8 +45,9 @@ Main.run = function(x) {
 
     if (typeof Main.objs[key] == 'undefined') {
         var comp = window[key];
-        var t = new window[key](Main.getContext());
-        Main.objs['Composition' + x] = t;
+        console.log(window[key]);
+        var t = new window[key](Main.getCanvas());
+        Main.objs[key] = t;
     }
 
     if (Main.exclusive) {
@@ -72,7 +74,8 @@ Main.ready = function() {
     var html = [];
     for (var x = 0; x < Main.files.length; ++x) {
         Main.loadJs('Composition' + Main.files[x] + '.js');
-        html.push('<a onclick="Main.run(' + Main.files[x] + ');">' + (x+1) + '</a>');
+        html.push('<a onclick="Main.run(' + Main.files[x] + ');">' + Main.files[x] + '</a>');
     }
+    html.push('<a onclick="Main.stopAll()">stop</a>');
     $('#tests').html(html.join("&nbsp;&nbsp;"));
 };
