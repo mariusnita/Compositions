@@ -45,7 +45,6 @@ Main.run = function(x) {
 
     if (typeof Main.objs[key] == 'undefined') {
         var comp = window[key];
-        console.log(window[key]);
         var t = new window[key](Main.getCanvas());
         Main.objs[key] = t;
     }

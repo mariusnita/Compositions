@@ -5,8 +5,6 @@ function Composition21(ctx) {
 Composition21.prototype = clone(Composition17.prototype);
 
 Composition21.prototype.runFunc = function() {
-    console.log('runfunc');
-
     var w = this.ctx.canvas.width;
     var h = this.ctx.canvas.height;
 

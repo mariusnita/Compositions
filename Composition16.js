@@ -63,7 +63,6 @@ Composition16.prototype.runFunc = function(white, black) {
 
     this.rects.forEach(function(rect) {
         var c = nextColor();
-        console.log(c);
 
         var oldC = this.ctx.fillStyle;
         this.ctx.fillStyle = c;

@@ -53,7 +53,6 @@ Composition8.prototype.runFunc = function(prevV,v) {
 };
 
 Composition8.prototype.run = function() {
-    console.log("run t8");
     this.blank();
     var timeout = 100;
     var j = 0;
