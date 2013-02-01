@@ -23,7 +23,8 @@
         play : ['play','pause'],
         distrib : ['spread','focal'],
         cols : ['colors','mono'],
-        flyToTheLight : ['attract','radiate']
+        flyToTheLight : ['attract','radiate'],
+        bound : ['bound','unbound'],
       }
 
       $(document).ready(function() {
@@ -43,6 +44,9 @@
           }
           if (evt.keyCode === 67) { // c
             cols();
+          }
+          if (evt.keyCode === 88) { // x
+            bound();
           }
           if (evt.keyCode === 65) { // a
             flyToTheLight();
@@ -75,6 +79,9 @@
       }
       function cols() {
         doOpt('cols',true);
+      }
+      function bound() {
+        doOpt('bound',true);
       }
       function flyToTheLight() {
         doOpt('flyToTheLight',true);
@@ -144,6 +151,9 @@
           </div>
           <div class="opt" onclick="flyToTheLight()">
             <span id="flyToTheLight"></span> (a)
+          </div>
+          <div class="opt" onclick="bound()">
+            <span id="bound"></span> (x)
           </div>
           <!-- <div class="opt" onclick="what()"> -->
           <!--   what -->

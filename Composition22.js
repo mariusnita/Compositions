@@ -8,47 +8,9 @@ function Composition22(ctx) {
 Composition22.prototype = clone(Composition.prototype);
 
 Composition22.prototype.runFunc = function(pt) {
-    //this.blank('rgba(0,0,0,0.01)');
-
-    // var xtop = Math.min(pt.x,m.x);
-    // var ytop = Math.min(pt.y,m.y);
-    // var xbot = Math.abs(pt.x-m.x);
-    // var ybot = Math.abs(pt.y-m.y);
-    
-    //this.strokeRect(xtop,ytop,xbot,ybot,pt.color);
-
-    {
-        if (Math.floor(Math.random() * 20) == 10) {
-            if (pt.dir === 0 || pt.dir === 1) {
-                pt.dir = Math.floor(Math.random() * 2) + 2;
-            } else if (pt.dir === 2 || pt.dir === 3) {
-                pt.dir = Math.floor(Math.random() * 2);
-            }
-        }
-
-        //this.fillRect(pt.x,pt.y,5,5,'#000');
-
-        if (pt.dir === 0) {
-            pt.y --;
-        }
-        else if (pt.dir === 1) {
-            pt.y ++;
-        } 
-        else if (pt.dir === 2) {
-            pt.x ++;
-        }
-        else if (pt.dir === 3) {
-            pt.x --;
-        }
-    }
-
-    if (this.mouseIn) {
-        var m = this.mouse;
-        this.drawLine(pt.x,pt.y,m.x,m.y,pt.color);
-    }
+    var m = this.mouse;
 
     if (this.opts.flyToTheLight && this.mouseIn) {
-        var m = this.mouse;
         var distx = Math.abs(pt.x-m.x);
         var disty = Math.abs(pt.y-m.y);
 
@@ -65,7 +27,34 @@ Composition22.prototype.runFunc = function(pt) {
         }
     }
 
-        
+    if (Math.floor(Math.random() * 20) == 10) {
+        if (pt.dir === 0 || pt.dir === 1) {
+            pt.dir = Math.floor(Math.random() * 2) + 2;
+        } else if (pt.dir === 2 || pt.dir === 3) {
+            pt.dir = Math.floor(Math.random() * 2);
+        }
+    }
+
+    //this.strokeRect(pt.x,pt.y,5,5,pt.color);
+
+    if (pt.dir === 0) {
+        pt.y --;
+    }
+    else if (pt.dir === 1) {
+        pt.y ++;
+    } 
+    else if (pt.dir === 2) {
+        pt.x ++;
+    }
+    else if (pt.dir === 3) {
+        pt.x --;
+    }
+
+
+    if (this.mouseIn) {
+        this.drawLine(pt.x,pt.y,m.x,m.y,pt.color);
+    }
+
     if (pt.x === 0)
         pt.x = this.w - 1;
     else if (pt.x === this.w-1)
@@ -75,13 +64,14 @@ Composition22.prototype.runFunc = function(pt) {
     else if (pt.y === this.h-1)
         pt.y = 0;
 
-
     //this.fillRect(pt.x,pt.y,5,5,pt.color);
     this.drawPoint(pt.x,pt.y,pt.color);
-    // this.theMan.forEach(function(m) {
-    //     this.drawLine(pt.x,pt.y,m.x,m.y,pt.color);
-    // }.bind(this));
 
+    if (this.opts.bound) {
+        this.theMan.forEach(function(m) {
+            this.drawLine(pt.x,pt.y,m.x,m.y,pt.color);
+        }.bind(this));
+    }
 };
 
 Composition22.prototype.doNext = function() {
@@ -111,8 +101,8 @@ Composition22.prototype.init = function() {
 
     this.theMan = [];
 
-    for (var i = 0; i < this.w; i += 30) {
-        for (var j = 0; j < this.h; j += 30) {
+    for (var i = 0; i < this.w; i += 80) {
+        for (var j = 0; j < this.h; j += 80) {
             var x = this.opts.distrib ? i : this.w/2;
             var y = this.opts.distrib ? j : this.h/2;
             var colr = this.opts.cols ? this.getColor() : this.bwColor();
@@ -124,7 +114,7 @@ Composition22.prototype.init = function() {
                 color : colr
             };
             this.points.push(p);
-            if (Math.floor(Math.random()*150) === 50)
+            if (Math.floor(Math.random()*50) === 25)
                 this.theMan.push(p);
         }   
     }
