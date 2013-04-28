@@ -15,6 +15,8 @@ function Composition(canvas) {
     Composition.objects[this.objectName] = this;
     this.computeColorsDefault();
     this.stopped = true;
+    this.width = this.ctx.canvas.width;
+    this.height = this.ctx.canvas.height;
 }
 
 Composition.objects = {};
@@ -80,13 +82,20 @@ Composition.prototype.end = function() {
     }
 };
 
-Composition.prototype.drawLine = function(x1,y1,x2,y2,color) {
+Composition.prototype.drawLine = function(x1,y1,x2,y2,color,width) {
     if (typeof color == 'undefined') {
         color = this.getColor();
     }
+
+
+    if (typeof width === 'undefined') {
+        width = 1;
+    }
+
     var oldC = this.ctx.strokeStyle;
+
     this.ctx.strokeStyle = color;
-    this.ctx.lineWidth = 1;
+    this.ctx.lineWidth = width;
     this.ctx.beginPath();
     this.ctx.moveTo(x1,y1);
     this.ctx.lineTo(x2,y2);
@@ -188,6 +197,11 @@ Composition.prototype.listenToMouse = function(f) {
     }.bind(this), false);
 };
 
-
-
+Composition.prototype.each = function(f) {
+    for (var x = 0; x < this.ctx.canvas.width; ++x) {
+        for (var y = 0; y < this.ctx.canvas.height; ++y) {
+            f(x,y);
+        }
+    }
+};
 

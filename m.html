@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="Composition.js"></script>
+    <script type="text/javascript" src="Mondrian.js"></script>
+
+    <script type="text/javascript">
+      var canvas = null;
+      var mondrian = null;
+
+      function mode(m) {
+        mondrian.mode = m;
+        $('.button').removeClass('active');
+        $('.' + m).parent().addClass('active');
+      }
+
+      $(document).ready(function() {
+        canvas = document.getElementById('myCanvas');
+        mondrian = new Mondrian(canvas);
+        mondrian.run();
+        mode('vertical');
+        $(document).on('keydown', document, function() {
+          $('.button').removeClass('active');
+          mondrian.restore();
+          mondrian.mode = '';
+        });
+      });
+    </script>
+
+    <style type="text/css"> 
+      html { height: 100%; }
+
+      body {
+        margin: 0;
+        height: 100%;
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#666));
+        background-size: 100%;
+      }
+
+      canvas {
+        box-shadow: 0px 5px 8px #666;
+      }
+
+      .main {
+        margin: 0 auto;
+        padding-top: 40px;
+        width: 500px;
+        text-align: center;
+        position: relative;
+      }
+
+      .active {
+        box-shadow: 0px 2px 3px #999;
+      }
+
+      .button {
+        background-color: #fff;
+        width: 50px;
+        height: 50px;
+        margin: 0;
+        margin-bottom: 10px;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .vertical {
+        background-color: black;
+        width: 10px;
+        height: 100%;
+        left: 50%;
+        position: absolute;
+        margin-left: -5px;
+      }
+
+      .horizontal {
+        background-color: black;
+        height: 10px;
+        width: 100%;
+        top: 50%;
+        position: absolute;
+        margin-top: -5px;      
+      }
+
+      .red {
+        background-color: red;
+        width: 100%;
+        height: 100%;
+      }
+      .yellow {
+        background-color: yellow;
+        width: 100%;
+        height: 100%;
+      }
+      .blue {
+        background-color: blue;
+        width: 100%;
+        height: 100%;
+      }
+      .white {
+        background-color: white;
+        width: 100%;
+        height: 100%;
+      }
+
+      .nav {
+        position: absolute;
+        left: -65px;
+      }
+
+      .link {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        display: inline;
+        padding: 3px;
+        background-color: #eee;
+        text-align: center;
+        font-family: helvetica;
+        font-size: 12px;
+      }
+
+      .link a {
+        color: #666;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="main">
+      <div class="nav">
+        <div class="button" onclick="mode('vertical')"><div class="vertical"></div></div>
+        <div class="button" onclick="mode('horizontal')"><div class="horizontal"></div></div>
+        <div class="button" onclick="mode('red')"><div class="red"></div></div>
+        <div class="button" onclick="mode('yellow')"><div class="yellow"></div></div>
+        <div class="button" onclick="mode('blue')"><div class="blue"></div></div>
+        <div class="button" onclick="mode('white')"><div class="white"></div></div>
+      </div>
+      <canvas id="myCanvas" width="500" height="600" style="cursor:crosshair;"></canvas>
+    </div>
+    <div class="link"><a href="http://mariusnita.com">back to mariusnita.com</a></div>
+  </body>
+</html>
