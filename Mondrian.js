@@ -127,20 +127,28 @@ Mondrian.prototype.run = function() {
                 bot_x = this.width,
                 bot_y = this.height;
             
+            var mouse_x = m.x;
+            var mouse_y = m.y;
+
+            if (mouse_x < 0)
+                mouse_x = 0;
+            if (mouse_y < 0)
+                mouse_y = 0;
+
             this.shapes.forEach(function(shape) {
                 if (shape.mode === 'vertical') {
-                    if (shape.y1 < m.y && shape.y2 > m.y) {
-                        if (shape.x1 < m.x && shape.x1 > top_x)
+                    if (shape.y1 <= mouse_y && shape.y2 > mouse_y) {
+                        if (shape.x1 <= mouse_x && shape.x1 > top_x)
                             top_x = shape.x1+5;
-                        if (shape.x1 > m.x && shape.x1 < bot_x)
+                        if (shape.x1 > mouse_x && shape.x1 < bot_x)
                             bot_x = shape.x1-5;
                     }
                 }
                 if (shape.mode === 'horizontal') {
-                    if (shape.x1 < m.x && shape.x2 > m.x) {
-                        if (shape.y1 < m.y && shape.y1 > top_y) 
+                    if (shape.x1 <= mouse_x && shape.x2 > mouse_x) {
+                        if (shape.y1 <= mouse_y && shape.y1 > top_y) 
                             top_y = shape.y1+5;
-                        if (shape.y1 > m.y && shape.y1 < bot_y)
+                        if (shape.y1 > mouse_y && shape.y1 < bot_y)
                             bot_y = shape.y1-5;
                     }
                 }

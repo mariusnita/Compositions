@@ -108,41 +108,78 @@
       }
 
       .nav {
-        position: absolute;
-        left: -65px;
+        margin-left: 60px;
       }
 
       .link {
-        position: absolute;
-        top: 5px;
-        left: 5px;
-        display: inline;
-        padding: 3px;
+        text-align: left;
+        width: 200px;
+      }
+
+      .link p {
+        padding: 5px;
+        margin: 0;
         background-color: #eee;
-        text-align: center;
         font-family: helvetica;
         font-size: 12px;
+
       }
 
       .link a {
         color: #666;
         text-decoration: none;
       }
+
+      table td {
+        vertical-align: top;
+        padding: 10px;
+      }
+
+      table {
+        margin-top: 20px;
+        margin-left: 20px;
+      }
     </style>
   </head>
   <body>
 
-    <div class="main">
-      <div class="nav">
-        <div class="button" onclick="mode('vertical')"><div class="vertical"></div></div>
-        <div class="button" onclick="mode('horizontal')"><div class="horizontal"></div></div>
-        <div class="button" onclick="mode('red')"><div class="red"></div></div>
-        <div class="button" onclick="mode('yellow')"><div class="yellow"></div></div>
-        <div class="button" onclick="mode('blue')"><div class="blue"></div></div>
-        <div class="button" onclick="mode('white')"><div class="white"></div></div>
-      </div>
-      <canvas id="myCanvas" width="500" height="600" ></canvas>
-    </div>
-    <div class="link"><a href="http://mariusnita.com">back to mariusnita.com</a></div>
+    <table>
+      <tr>
+        <td>
+
+          <div class="link">
+            <p>The artist Piet Mondrian was working with visual
+              languages: basic rules about form and placement which
+              can be composed to create pictures. His idea was to
+              achieve a fluid and effortless mode of creating. By
+              constraining himself within an impoverished framework,
+              he could attain a state of flow, swiftly and intuitively
+              placing elements while maintaining a keen focus on
+              compositional balance.
+            </p>
+            <p>
+              This is a computer implementation of a Mondrianic
+              visual language. Tip: press any key to disable the
+              currently selected mode.
+            </p>
+
+            <p><a href="http://mariusnita.com">back to mariusnita.com</a></p>
+          </div>
+
+        <td>
+          <div class="nav">
+            <div class="button" onclick="mode('vertical')"><div class="vertical"></div></div>
+            <div class="button" onclick="mode('horizontal')"><div class="horizontal"></div></div>
+            <div class="button" onclick="mode('red')"><div class="red"></div></div>
+            <div class="button" onclick="mode('yellow')"><div class="yellow"></div></div>
+            <div class="button" onclick="mode('blue')"><div class="blue"></div></div>
+            <div class="button" onclick="mode('white')"><div class="white"></div></div>
+          </div>
+        </td>
+        <td>
+          <canvas id="myCanvas" width="500" height="600" ></canvas>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
