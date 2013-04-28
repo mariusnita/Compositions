@@ -16,10 +16,6 @@ Mondrian.prototype.restore = function() {
 };
 
 Mondrian.prototype.run = function() {
-    this.canvas.addEventListener('mouseover',function() {
-        console.log('mouse in');
-    }.bind(this));
-
     this.canvas.addEventListener('mouseout',function() {
         this.shape = null;
     }.bind(this));
@@ -113,7 +109,6 @@ Mondrian.prototype.run = function() {
 
             bucket_size = this.width / possibilities.length;
             pos = Math.floor(m.x / bucket_size);
-            console.log(pos, possibilities.length);
 
             l = this.shape = {
                 type: 'line', 
@@ -156,38 +151,8 @@ Mondrian.prototype.run = function() {
     }.bind(this));
 
     this.canvas.addEventListener('click',function() {
-        console.log('click');
         if (this.shape)
             this.shapes.push(this.shape);
         this.save();
     }.bind(this));
 };
-
-
-var PixelMap = function() {
-    var map = [];
-    var ctx = null;
-    var width = 0;
-    var height = 0;
-
-    function init(ctx) {
-        width = ctx.canvas.width;
-        height = ctx.canvas.height;
-
-        console.log(width, height);
-
-        for (var x = 0; x < width; ++x) {
-            map[x] = [];
-            for (var y = 0; y < height; ++y) {
-                map[x][y] = ctx.getImageData(x,y,1,1).data;
-            }
-        }
-
-        return map;
-    }
-
-    return {
-        map: map,
-        init: init
-    };
-}();

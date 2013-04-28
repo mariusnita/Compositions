@@ -34,7 +34,11 @@
       body {
         margin: 0;
         height: 100%;
+        background-color: #eee;
         background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#666));
+        background: -moz-linear-gradient(top, #fff, #666);
+        background: -ms-linear-gradient(top, #fff, #666);
+        background: -o-linear-gradient(top, #fff, #666);
         background-size: 100%;
       }
 
@@ -137,7 +141,7 @@
         <div class="button" onclick="mode('blue')"><div class="blue"></div></div>
         <div class="button" onclick="mode('white')"><div class="white"></div></div>
       </div>
-      <canvas id="myCanvas" width="500" height="600" style="cursor:crosshair;"></canvas>
+      <canvas id="myCanvas" width="500" height="600" ></canvas>
     </div>
     <div class="link"><a href="http://mariusnita.com">back to mariusnita.com</a></div>
   </body>
