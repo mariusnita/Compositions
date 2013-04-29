@@ -18,6 +18,7 @@ Mondrian.prototype.restore = function() {
 Mondrian.prototype.run = function() {
     this.canvas.addEventListener('mouseout',function() {
         this.shape = null;
+        this.restore();
     }.bind(this));
 
     this.listenToMouse(function(m) {
