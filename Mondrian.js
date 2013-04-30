@@ -37,8 +37,6 @@ Mondrian.prototype.run = function() {
 
             ys.sort(function(x,y) { return x-y; });
 
-            console.log(ys);
-
             var possibilities = [];
 
             if (ys.length > 1) {
