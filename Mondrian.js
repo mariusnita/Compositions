@@ -35,7 +35,9 @@ Mondrian.prototype.run = function() {
 
             ys.push(this.height);
 
-            ys.sort(function(x,y) { return x >= y; });
+            ys.sort(function(x,y) { return x-y; });
+
+            console.log(ys);
 
             var possibilities = [];
 
@@ -85,7 +87,7 @@ Mondrian.prototype.run = function() {
 
             xs.push(this.width);
 
-            xs.sort(function(x,y) { return x >= y; });
+            xs.sort(function(x,y) { return x-y; });
 
             possibilities = [];
 
