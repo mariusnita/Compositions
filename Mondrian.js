@@ -27,11 +27,17 @@ Mondrian.prototype.run = function() {
         if (this.mode === 'vertical') {
             var ys = [];
 
+            var my_mouse_x = m.x;
+            if (m.x < 5)
+                my_mouse_x = 5;
+            if (m.x > this.width - 5)
+                my_mouse_x = this.width - 5;
+
             this.shapes.forEach(function(shape) {
-                if (shape.mode === 'horizontal' && shape.x1 <= m.x && shape.x2 > m.x) {
+                if (shape.mode === 'horizontal' && shape.x1 <= my_mouse_x && shape.x2 > my_mouse_x && shape.y1 > 5 && shape.y1 < this.height - 5) {
                     ys.push(shape.y1);
                 }
-            });
+            }.bind(this));
 
             ys.push(this.height);
 
@@ -39,26 +45,31 @@ Mondrian.prototype.run = function() {
 
             var possibilities = [];
 
-            if (ys.length > 1) {
+            if (ys.length == 1) {
+                possibilities = [{ x1: my_mouse_x, y1 : 0, x2 : my_mouse_x, y2 : this.height }];
+            }
+            else if (ys.length > 1) {
                 ys.forEach(function(y) { 
                     if (y !== 0) {
-                        possibilities.push({ x1 : m.x, y1 : 0, x2 : m.x, y2 : y });
+                        possibilities.push({ x1 : my_mouse_x, y1 : 0, x2 : my_mouse_x, y2 : y });
                     }
                 }.bind(this));
 
                 ys.forEach(function(y) { 
                     if (y !== this.height) {
-                        possibilities.push({ x1 : m.x, y1 : y, x2 : m.x, y2 : this.height });
+                        possibilities.push({ x1 : my_mouse_x, y1 : y, x2 : my_mouse_x, y2 : this.height });
                     }
                 }.bind(this));
             }
-            var prev_y = 0;
-            ys.forEach(function(y) {
-                if (prev_y != null) {
-                    possibilities.push({ x1 : m.x, y1 : prev_y, x2 : m.x, y2 : y });
-                }
-                prev_y = y;
-            });
+            if (ys.length > 2) {
+                var prev_y = 0;
+                ys.forEach(function(y) {
+                    if (prev_y != null) {
+                        possibilities.push({ x1 : my_mouse_x, y1 : prev_y, x2 : my_mouse_x, y2 : y });
+                    }
+                    prev_y = y;
+                });
+            }
 
             var bucket_size = this.height / possibilities.length;
             var pos = Math.floor(m.y / bucket_size);
@@ -77,11 +88,17 @@ Mondrian.prototype.run = function() {
         } else if (this.mode === 'horizontal') {
             var xs = [];
 
+            var my_mouse_y = m.y;
+            if (m.y < 5)
+                my_mouse_y = 5;
+            if (m.y > this.height - 5)
+                my_mouse_y = this.height - 5;
+
             this.shapes.forEach(function(shape) {
-                if (shape.mode === 'vertical' && shape.y1 <= m.y && shape.y2 > m.y) {
+                if (shape.mode === 'vertical' && shape.y1 <= my_mouse_y && shape.y2 > my_mouse_y && shape.x1 > 5 && shape.x1 < this.width - 5) {
                     xs.push(shape.x1);
                 }
-            });
+            }.bind(this));
 
             xs.push(this.width);
 
@@ -89,24 +106,29 @@ Mondrian.prototype.run = function() {
 
             possibilities = [];
 
-            if (xs.length > 1) {
+            if (xs.length === 1) {
+                possibilities = [{ x1 : 0, y1 : my_mouse_y, x2 : this.width, y2 : my_mouse_y }];
+            }
+            else if (xs.length > 1) {
                 xs.forEach(function(x) { 
                     if (x !== 0) {
-                        possibilities.push({ x1 : 0, y1 : m.y, x2 : x, y2 : m.y });
+                        possibilities.push({ x1 : 0, y1 : my_mouse_y, x2 : x, y2 : my_mouse_y });
                     }
                 }.bind(this));
 
                 xs.forEach(function(x) { 
                     if (x !== this.width) {
-                        possibilities.push({ x1 : x, y1 : m.y, x2 : this.width, y2 : m.y });
+                        possibilities.push({ x1 : x, y1 : my_mouse_y, x2 : this.width, y2 : my_mouse_y });
                     }
                 }.bind(this));
             }
-            var prev_x = 0;
-            xs.forEach(function(x) {
-                possibilities.push({ x1 : prev_x, y1 : m.y, x2 : x, y2 : m.y });
-                prev_x = x;
-            });
+            if (xs.length > 2) {
+                var prev_x = 0;
+                xs.forEach(function(x) {
+                    possibilities.push({ x1 : prev_x, y1 : my_mouse_y, x2 : x, y2 : my_mouse_y });
+                    prev_x = x;
+                });
+            }
 
             bucket_size = this.width / possibilities.length;
             pos = Math.floor(m.x / bucket_size);
