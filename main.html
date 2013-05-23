@@ -7,20 +7,105 @@
     <script type="text/javascript" src="Main.js"></script>
 
     <script type="text/javascript">
-      $(document).ready(Main.ready);
+      $(document).ready(function() {
+        var hidden = true;
+
+        function cshow() { $('.control').css('top', -20); hidden = false; }
+        function chide() { $('.control').css('top',  - $('.control').height()); hidden = true; }
+
+        $('#myCanvas')
+          .attr('width',$(window).width())
+          .attr('height',$(window).height());
+        $('.control').mouseover(cshow);
+        $('.control').mouseout(chide);
+        $('.control').click(function() { if (hidden) { cshow() } else { chide() } });
+        Main.ready();
+        $('.control').css('top',  - $('.control').height());
+      });
     </script>
 
     <style type="text/css"> 
       a { color: #666; cursor: pointer; }
-      body { background-color: #111; text-align: center;padding-top: 50px;padding-bottom:50px; color: #666;}
+
+      html {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+      body {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+      .control {
+        position: fixed;
+        z-index: 2;
+        background-color: rgba(255,255,255,0.7);
+        border-left: 1px solid #aaa;
+        border-right: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
+        border-radius: 10px;
+        padding-top: 10px;
+        left: 50%;
+        width: 400px;
+        text-align: center;
+        margin-left: -200px;
+      }
+
+      .control-empty {
+        position: fixed;
+        z-index: 3;
+        background-color: rgba(255,255,255,0.7);
+        border-left: 1px solid #aaa;
+        border-right: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
+        border-radius: 10px;
+        padding-top: 10px;
+        top: -10px;
+        left: 50%;
+        width: 400px;
+        text-align: center;
+        margin-left: -200px;        
+      }
+
+      .but {
+        cursor: pointer;
+        border: 1px solid #333;
+        width: 20px;
+        height: 20px;
+        margin: 4px;
+        color: #ddd;
+        font-family: helvetica;
+        font-size: 12px;
+        float: left;
+      }
+
+      canvas {
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        cursor: pointer;
+      }
+
+      button {
+        height: 20px;
+        margin: 4px;
+      }
+
     </style>
   </head>
   <body>
-    <p id="tests"></p>
-    <p>
-      <input id="exc" type="checkbox" checked="checked" onclick="Main.setExclusive(this.checked)"/>
-      <label for="exc">exclusive</label>
-    </p>
-    <canvas id="myCanvas" width="1300" height="800" style="cursor:pointer;"></canvas>
+    <div class="control">
+      <p id="tests"></p>      
+      <p>
+        <button onclick="Main.stopAll()">stop</button>
+      </p>
+    </div>
+    <canvas id="myCanvas"></canvas>
   </body>
 </html>

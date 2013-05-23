@@ -29,7 +29,7 @@ Main.loadJs = function(filename) {
     var fileref = document.createElement('script');
     fileref.setAttribute("type","text/javascript");
     fileref.setAttribute("src", filename);
-    document.body.appendChild(fileref);
+    document.head.appendChild(fileref);
 };
 
 Main.getCanvas = function() { 
@@ -71,10 +71,10 @@ Main.setExclusive = function(t) {
 
 Main.ready = function() {
     var html = [];
+    var c = new Composition(Main.getCanvas());
     for (var x = 0; x < Main.files.length; ++x) {
         Main.loadJs('Composition' + Main.files[x] + '.js');
-        html.push('<a onclick="Main.run(' + Main.files[x] + ');">' + Main.files[x] + '</a>');
+        html.push('<div class="but" style="background-color: ' + c.getColor() + ' " onclick="Main.run(' + Main.files[x] + ');">' + Main.files[x] + '</div>');
     }
-    html.push('<a onclick="Main.stopAll()">stop</a>');
-    $('#tests').html(html.join("&nbsp;&nbsp;"));
+    $('#tests').html(html.join(""));
 };

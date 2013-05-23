@@ -139,8 +139,6 @@ Composition22.prototype.init = function() {
 };
 
 Composition22.prototype.run = function() {
-    if (typeof (this.points) === 'undefined') {
-        this.init();
-    }
+    this.init();
     this.doNext();
 };

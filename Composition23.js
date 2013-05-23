@@ -17,7 +17,7 @@ Composition23.prototype.runFunc = function() {
         }
     }
 
-    this.setTimeout(this.objectExpr() + '.runFunc()');
+    this.setTimeout(this.objectExpr() + '.runFunc()',20);
 };
 
 function col(r,g,b) {
@@ -25,5 +25,6 @@ function col(r,g,b) {
 }
 
 Composition23.prototype.run = function() {
+    this.blank('black');
     this.runFunc();
 };
