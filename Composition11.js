@@ -4,14 +4,14 @@ function Composition11(ctx) {
 
 Composition11.prototype = clone(Composition.prototype);
 
-Composition11.prototype.runFunc = function(x) {
+Composition11.prototype.runFunc = function(x,y) {
     var circleColor = '#223344';
 
     if (x > 350) {
         circleColor = '#993322';
     }
 
-    this.drawCircle(400,400,50,circleColor);
+    this.drawCircle(this.width/2,this.height/2,50,circleColor);
 
     this.computeColors(0,50,5);
 
@@ -21,17 +21,19 @@ Composition11.prototype.runFunc = function(x) {
         this.setColors(['#000']);
     }
 
-    this.drawLine(x,x,799-x,x);
-    this.drawLine(x,x,x,799-x);
-    this.drawLine(799-x,x,799-x,799-x);
-    this.drawLine(x,799-x,799-x,799-x);
+    this.drawLine(x,y,this.width-x,y);
+    this.drawLine(x,y,x,this.height-y);
+    this.drawLine(this.width-x,y,this.width-x,this.height-y);
+    this.drawLine(x,this.height-y,this.width-x,this.height-y);
 };
 
 Composition11.prototype.run = function() {
     this.blank();
     var timeout = 50;
-    for (var x = 0; x < 400; ++x) {
-        this.setTimeout(this.objectExpr() + '.runFunc(' + x + ')', timeout);
+    var multiplier = this.height/this.width;
+    for (var x = 0; x < this.width/2; ++x) {
+        var y = x * multiplier;
+        this.setTimeout(this.objectExpr() + '.runFunc(' + x + ',' + y + ')', timeout);
         timeout += 50;
     }
 };

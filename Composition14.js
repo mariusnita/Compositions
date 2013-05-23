@@ -5,7 +5,7 @@ function Composition14(ctx) {
 Composition14.prototype = clone(Composition.prototype);
 
 Composition14.prototype.runFunc = function(x) {
-    for (var y = 0; y < 800; ++y) {
+    for (var y = 0; y < this.height; ++y) {
         if (y * Math.abs(Math.sin(x)) < 80) {
             this.drawPoint(x,y);
             if (x % 2 == 0 && y % 2 == 0) {
@@ -23,7 +23,7 @@ Composition14.prototype.run = function() {
     this.blank();
     var timeout = 50;
     this.computeColors(100,200,1);
-    for (var x = 0; x < 800; ++x) {
+    for (var x = 0; x < this.width; ++x) {
         this.setTimeout(this.objectExpr() + '.runFunc(' + x + ')', timeout);
         timeout += 10;
     }

@@ -29,21 +29,21 @@ Composition5.prototype.runFunc = function(prevV,v) {
         return;
     if (v > 500000)
         return;
-    for (var x = 0; x < 800; ++x) {
-        for (var y = 0; y < 800; ++y) {
+    for (var x = 0; x < this.width; ++x) {
+        for (var y = 0; y < this.height; ++y) {
             if (x * y < v && x * y >= prevV) {
                 if (x % 2 == 0 && y % 2 == 0) {
                     this.ctx.fillStyle="#00aaaa";
                     if (x * y < 400000)
                         this.ctx.fillRect(x,y,1,1);
                     if (x * y < 100000)
-                        this.ctx.fillRect(800-x,y,1,1);
+                        this.ctx.fillRect(this.width-x,y,1,1);
                 } else {
                     this.ctx.fillStyle="#777557";
                     if (x * y > 400000)
-                        this.ctx.fillRect(800-x,800-y,1,1);
+                        this.ctx.fillRect(this.width-x,this.height-y,1,1);
                     if (x * y < 400000)
-                    this.ctx.fillRect(x,800-y,1,1);
+                    this.ctx.fillRect(x,this.height-y,1,1);
                 }
             }
         }
@@ -53,7 +53,7 @@ Composition5.prototype.runFunc = function(prevV,v) {
 Composition5.prototype.run = function() {
     var timeout = 100;
     var j = 0;
-    for (var i = 0; i < 800; ++i) {
+    for (var i = 0; i < this.width; ++i) {
         this.setTimeout(this.objectExpr() + ".runFunc(" + j + "," + (i * 1000) + ")", timeout);
         j = i * 1000;
         timeout += 40;

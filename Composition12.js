@@ -10,10 +10,10 @@ Composition12.prototype.runFunc = function(x,go) {
     if (v1 <= 1 || v2 <= 1) {
         return;
     }
-    this.strokeCircle(200,200,v1,1,x%2 == 0 ? '#993399': '#339933');
-    this.strokeCircle(600,200,v1,1,x%2 == 0 ? '#99ffee': '#445533');
-    this.strokeCircle(200,600,v2,1,x%2 == 0 ? '#330033': '#229999');
-    this.strokeCircle(600,600,v2,1,x%2 == 0 ? '#997733': '#778800');
+    this.strokeCircle(this.width/4,this.height/4,v1,1,x%2 == 0 ? '#993399': '#339933');
+    this.strokeCircle(this.width*3/4,this.height/4,v1,1,x%2 == 0 ? '#99ffee': '#445533');
+    this.strokeCircle(this.width/4,this.height*3/4,v2,1,x%2 == 0 ? '#330033': '#229999');
+    this.strokeCircle(this.width*3/4,this.height*3/4,v2,1,x%2 == 0 ? '#997733': '#778800');
 };
 
 Composition12.prototype.run = function() {

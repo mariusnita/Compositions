@@ -23,7 +23,7 @@ Composition7.prototype.endLoop = function() {
 Composition7.prototype.run = function() {
     this.blank();
     var timeout=100;
-    for (var x = 0; x < 800; x += 1) {
+    for (var x = 0; x < this.width; x += 1) {
         var t = this.setTimeout(this.objectExpr() + ".runFunc(" + x + ")", timeout);
         this.timeouts.push(t);
         timeout+=20;
