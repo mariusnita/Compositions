@@ -127,7 +127,7 @@ Composition.prototype.getColorOrDefault = function(color) {
     return color;
 };
 
-Composition.prototype.circle = function(x,y,size,color) {
+Composition.prototype.circle = function(x,y,size) {
     this.ctx.beginPath();
     this.ctx.arc(x,y,size,0,Math.PI*2,true);
     this.ctx.closePath();
@@ -136,7 +136,7 @@ Composition.prototype.circle = function(x,y,size,color) {
 Composition.prototype.fillCircle = function(x,y,size,color) {
     color = this.getColorOrDefault(color);    
     this.ctx.fillStyle=color;
-    this.circle(x,y,size,color);
+    this.circle(x,y,size);
     this.ctx.fill();
 };
 
@@ -152,7 +152,7 @@ Composition.prototype.strokeCircle = function(x,y,size,width,color) {
     color = this.getColorOrDefault(color);    
     this.ctx.strokeStyle=color;
     this.ctx.lineWidth = width;
-    this.circle(x,y,size,color,true);
+    this.circle(x,y,size);
     this.ctx.stroke();
 };
 

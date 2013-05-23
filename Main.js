@@ -1,6 +1,6 @@
 var Main = {};
 
-Main.files = ['4','5','6','7','11','12', '13','14','15','16','17','18','19','20','21','22','23'];
+Main.files = ['4','5','6','7','11','12', '13','14','15','16','17','18','19','20','21','22','23','24','25'];
 
 Main.keys = function(obj) {
     var keys = [];
@@ -53,7 +53,7 @@ Main.run = function(x) {
         Main.stopAll();
     }
 
-    Main.objs['Composition' + x].run();
+    Main.objs[key].run();
 };
 
 Main.stopAll = function() {
