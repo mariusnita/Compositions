@@ -9,7 +9,7 @@ Composition14.prototype.runFunc = function(x) {
         if (y * Math.abs(Math.sin(x)) < 80) {
             this.drawPoint(x,y);
             if (x % 2 == 0 && y % 2 == 0) {
-                this.drawPoint(x,800-y);                
+                this.drawPoint(x,this.height-y);                
             }
         }
     }

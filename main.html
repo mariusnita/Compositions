@@ -11,16 +11,25 @@
         var hidden = true;
 
         function cshow() { $('.control').css('top', -20); hidden = false; }
-        function chide() { $('.control').css('top',  - $('.control').height()); hidden = true; }
+        function chide() { $('.control').css('top',  - 8 - $('.control').height()); hidden = true; }
 
-        $('#myCanvas')
-          .attr('width',$(window).width())
-          .attr('height',$(window).height());
+        function resize() {
+          $('#myCanvas')
+            .attr('width',$(window).width())
+            .attr('height',$(window).height());
+        }
+
         $('.control').mouseover(cshow);
         $('.control').mouseout(chide);
         $('.control').click(function() { if (hidden) { cshow() } else { chide() } });
+
+        resize();
+
         Main.ready();
-        $('.control').css('top',  - $('.control').height());
+
+        setTimeout('Main.run(24)',1000);
+
+        cshow();
       });
     </script>
 
@@ -49,6 +58,7 @@
         border-right: 1px solid #aaa;
         border-bottom: 1px solid #aaa;
         border-radius: 10px;
+        padding: 10px;
         padding-top: 10px;
         left: 50%;
         width: 400px;
@@ -74,11 +84,11 @@
 
       .but {
         cursor: pointer;
-        border: 1px solid #333;
-        width: 20px;
-        height: 20px;
+        border: 1px solid #aaa;
+        background-color: #ddd;
+        width: 30px;
         margin: 4px;
-        color: #ddd;
+        color: #333;
         font-family: helvetica;
         font-size: 12px;
         float: left;
@@ -92,18 +102,13 @@
         cursor: pointer;
       }
 
-      button {
-        height: 20px;
-        margin: 4px;
-      }
-
     </style>
   </head>
   <body>
     <div class="control">
       <p id="tests"></p>      
       <p>
-        <button onclick="Main.stopAll()">stop</button>
+        <div class="but" onclick="Main.stopAll()">stop</div>
       </p>
     </div>
     <canvas id="myCanvas"></canvas>

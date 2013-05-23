@@ -71,10 +71,9 @@ Main.setExclusive = function(t) {
 
 Main.ready = function() {
     var html = [];
-    var c = new Composition(Main.getCanvas());
     for (var x = 0; x < Main.files.length; ++x) {
         Main.loadJs('Composition' + Main.files[x] + '.js');
-        html.push('<div class="but" style="background-color: ' + c.getColor() + ' " onclick="Main.run(' + Main.files[x] + ');">' + Main.files[x] + '</div>');
+        html.push('<div class="but" onclick="Main.run(' + Main.files[x] + ');">' + Main.files[x] + '</div>');
     }
     $('#tests').html(html.join(""));
 };
