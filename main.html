@@ -25,6 +25,8 @@
 
         resize();
 
+        /* $(window).resize(resize); */
+
         Main.ready();
 
         setTimeout('Main.run(24)',1000);
@@ -66,25 +68,8 @@
         margin-left: -200px;
       }
 
-      .control-empty {
-        position: fixed;
-        z-index: 3;
-        background-color: rgba(255,255,255,0.7);
-        border-left: 1px solid #aaa;
-        border-right: 1px solid #aaa;
-        border-bottom: 1px solid #aaa;
-        border-radius: 10px;
-        padding-top: 10px;
-        top: -10px;
-        left: 50%;
-        width: 400px;
-        text-align: center;
-        margin-left: -200px;        
-      }
-
       .but {
         cursor: pointer;
-        border: 1px solid #ddd;
         width: 30px;
         margin: 4px;
         color: #333;
