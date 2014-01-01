@@ -1,7 +1,5 @@
 var Main = {};
 
-//Main.files = ['4','5','6','7','11','12', '13','14','15','16','17','18','19','20','21','22','23','24','25'];
-
 Main.files = _.difference(_.range(1,26), [1,2,8,9,10,22]);
 
 Main.keys = function(obj) {
@@ -74,7 +72,7 @@ Main.setExclusive = function(t) {
 Main.ready = function() {
     var html = [];
     for (var x = 0; x < Main.files.length; ++x) {
-        Main.loadJs('Composition' + Main.files[x] + '.js');
+        Main.loadJs('comps/Composition' + Main.files[x] + '.js');
         html.push('<div class="but" onclick="Main.run(' + Main.files[x] + ');">' + Main.files[x] + '</div>');
     }
     $('#tests').html(html.join(""));
