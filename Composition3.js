@@ -5,6 +5,10 @@ function Composition3(ctx) {
 
 Composition3.prototype = clone(Composition.prototype);
 
+Composition3.prototype.computeColors = function() {
+    this.colors = ["#777777","#999999","#447777","#9999bb","#bb6633","#bb9999"];
+};
+
 Composition3.prototype.runFunc = function(x) {
     this.blank();
 
@@ -27,7 +31,6 @@ Composition3.prototype.runFunc = function(x) {
 
 Composition3.prototype.run = function() {
     var timeout=100;
-    this.setColors(['#ccc']);
 
     for (var x = 0; x < 8000; x += 5) {
         this.setTimeout("{0}.runFunc({1})".format(this.objectExpr(), x), timeout);
