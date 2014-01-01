@@ -1,0 +1,38 @@
+.opt {
+    text-align: center;
+    width: 80px;
+    height: 80px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #222;
+    cursor: pointer;
+}
+
+a {
+    color: #666; 
+    cursor: pointer; 
+}
+
+body { 
+    text-align: left;
+    font-family: courier;
+    font-size: 12px;
+    background-color: #111; 
+    padding-bottom:50px; 
+    color: #666;
+}
+
+.what {
+    display:none;
+    width: 630px;
+    top: 50%;
+    left: 50%;
+    margin-top: -300px;
+    margin-left: -315px;
+    background-color: rgba(0,0,0,0.85);
+    position: absolute;
+    padding: 20px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 20px;
+}
