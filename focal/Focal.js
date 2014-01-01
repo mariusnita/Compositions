@@ -15,12 +15,13 @@ Focal.prototype.runFunc = function(pt) {
         var distx = Math.abs(pt.x-m.x);
         var disty = Math.abs(pt.y-m.y);
 
-        if (distx > disty) {
+        if (distx > 1) {
             if (pt.x > m.x)
                 pt.x--;
             else
                 pt.x++;
-        } else {
+        }
+        if (disty > 1) {
             if (pt.y > m.y)
                 pt.y--;
             else
