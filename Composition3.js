@@ -5,23 +5,32 @@ function Composition3(ctx) {
 
 Composition3.prototype = clone(Composition.prototype);
 
-/* override */ //Composition3.prototype.getColor = function() {
-//    return '#666666';
-//};
+Composition3.prototype.runFunc = function(x) {
+    this.blank();
+
+    var w = this.width;
+    var h = this.height;
+
+    for (var i = 0; i < w; i += 2) {
+        this.drawCircle(w-i, h-Math.sin(i)*x, 5);
+        this.drawCircle(w-i, h-Math.cos(i)*x, 5);
+        this.drawCircle(i, Math.sin(i)*x, 5);
+        this.drawCircle(i, Math.cos(i)*x, 5);
+    }
+    for (i = 0; i < h; i += 2) {
+        this.drawCircle(w-Math.sin(i)*x, h-i, 5);
+        this.drawCircle(w-Math.cos(i)*x, h-i, 5);
+        this.drawCircle(Math.sin(i)*x, i, 5);
+        this.drawCircle(Math.cos(i)*x, i, 5);
+    }
+};
 
 Composition3.prototype.run = function() {
     var timeout=100;
+    this.setColors(['#ccc']);
+
     for (var x = 0; x < 8000; x += 5) {
-        this.setTimeout(this.objectExpr() + ".blank();for (var y = 0; y < 800; ++y) { " + this.objectExpr() + ".drawCircle(800-y,800-Math.sin(y)*"+x+",5) }", timeout);
-        this.setTimeout("for (var z = 0; z < 800; ++z) { " + this.objectExpr() + ".drawCircle(800-z,800-Math.cos(z)*"+x+",5) }", timeout);
-        this.setTimeout("for (var y = 0; y < 800; ++y) { " + this.objectExpr() + ".drawCircle(y,Math.sin(y)*"+x+",5) }", timeout);
-        this.setTimeout("for (var z = 0; z < 800; ++z) { " + this.objectExpr() + ".drawCircle(z,Math.cos(z)*"+x+",5) }", timeout);
-
-        this.setTimeout("for (var y = 0; y < 800; ++y) { " + this.objectExpr() + ".drawCircle(800-Math.sin(y)*"+x+",800-y,5) }", timeout);
-        this.setTimeout("for (var z = 0; z < 800; ++z) { " + this.objectExpr() + ".drawCircle(800-Math.cos(z)*"+x+",800-z,5) }", timeout);
-        this.setTimeout("for (var y = 0; y < 800; ++y) { " + this.objectExpr() + ".drawCircle(Math.sin(y)*"+x+",y,5) }", timeout);
-        this.setTimeout("for (var z = 0; z < 800; ++z) { " + this.objectExpr() + ".drawCircle(Math.cos(z)*"+x+",z,5) }", timeout);
-
+        this.setTimeout("{0}.runFunc({1})".format(this.objectExpr(), x), timeout);
         timeout+=50;
     }    
 };

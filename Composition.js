@@ -2,6 +2,8 @@ function clone(obj) {
     if (typeof obj !== 'undefined') {
 	clone.prototype = Object(obj);
 	return new clone;
+    } else {
+        return undefined;
     }
 }
 
@@ -24,7 +26,7 @@ Composition.prefix = "_obj";
 Composition.index = 0;
 Composition.nextObjectName = function(){
     return Composition.prefix + (Composition.index++);
-}
+};
 
 Composition.prototype.getColor = function() {
     var col = this.colors[this.idx++];
