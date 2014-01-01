@@ -1,0 +1,49 @@
+a { color: #666; cursor: pointer; }
+
+html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.control {
+    position: fixed;
+    z-index: 2;
+    background-color: rgba(255,255,255,0.7);
+    border-left: 1px solid #aaa;
+    border-right: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    border-radius: 10px;
+    padding: 10px;
+    padding-top: 10px;
+    left: 50%;
+    width: 400px;
+    text-align: center;
+    margin-left: -200px;
+}
+
+.but {
+    cursor: pointer;
+    width: 30px;
+    margin: 4px;
+    color: #333;
+    font-family: helvetica;
+    font-size: 12px;
+    float: left;
+}
+
+canvas {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
