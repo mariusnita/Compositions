@@ -1,13 +1,13 @@
-function Composition22(ctx) {
+function Focal(ctx) {
     Composition.call(this, ctx);
     this.opts = {};
     this.bwCurColor = '#000';
     this.mouseIn = false;
 }
 
-Composition22.prototype = clone(Composition.prototype);
+Focal.prototype = clone(Composition.prototype);
 
-Composition22.prototype.runFunc = function(pt) {
+Focal.prototype.runFunc = function(pt) {
     var m = this.mouse;
 
     if (this.opts.flyToTheLight && this.mouseIn) {
@@ -64,7 +64,6 @@ Composition22.prototype.runFunc = function(pt) {
     else if (pt.y === this.h-1)
         pt.y = 0;
 
-    //this.fillRect(pt.x,pt.y,5,5,pt.color);
     this.drawPoint(pt.x,pt.y,pt.color);
 
     if (this.opts.bound) {
@@ -74,26 +73,29 @@ Composition22.prototype.runFunc = function(pt) {
     }
 };
 
-Composition22.prototype.doNext = function() {
+Focal.prototype.doNext = function() {
     this.points.forEach(function(p) {
         this.runFunc(p);
     }.bind(this));
-    this.setTimeout(this.objectExpr() + '.doNext()');
+
+    this.setTimeout(function() {
+        this.doNext();
+    }.bind(this));
 };
 
-Composition22.prototype.bwColor = function() {
+Focal.prototype.bwColor = function() {
     this.bwCurColor = this.bwCurColor === '#000' ? '#fff' : '#000';
     return this.bwCurColor;
 };
 
-Composition22.prototype.setOpts = function(opts) {
+Focal.prototype.setOpts = function(opts) {
     this.points.forEach(function(p) {
         p.color = opts.cols === true ? this.getColor() : this.bwColor();
     }.bind(this));
     this.opts = opts;
 };
 
-Composition22.prototype.init = function() {
+Focal.prototype.init = function() {
     this.w = this.ctx.canvas.width;
     this.h = this.ctx.canvas.height;
 
@@ -138,7 +140,7 @@ Composition22.prototype.init = function() {
     this.blank('#000');
 };
 
-Composition22.prototype.run = function() {
+Focal.prototype.run = function() {
     this.init();
     this.doNext();
 };
