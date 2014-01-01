@@ -1,29 +1,22 @@
-$(document).ready(function() {
-    var hidden = true;
+var hidden = true;
 
-    function cshow() { $('.control').css('top', -20); hidden = false; }
-    function chide() { $('.control').css('top',  - 8 - $('.control').height()); hidden = true; }
+function cshow() { 
+    $('.control').css('top', -20); 
+    hidden = false; 
+}
 
-    function resize() {
-        $('#myCanvas')
-            .attr('width',$(window).width())
-            .attr('height',$(window).height());
-    }
+function chide() { 
+    $('.control').css('top',  - 8 - $('.control').height()); 
+    hidden = true; 
+}
 
-    $('.control')
-        .mouseover(cshow)
-        .mouseout(chide)
-        .click(function() { 
-            if (hidden) { 
-                cshow(); 
-            }
-            else { 
-                chide(); 
-            } 
-        });
+function resize() {
+    $('#myCanvas')
+        .attr('width',$(window).width())
+        .attr('height',$(window).height());
+}
 
-    resize();
-
+function initRunner() {
     var html = [];
 
     _.each(CompositionRunner.files, function(file) {
@@ -31,9 +24,19 @@ $(document).ready(function() {
         html.push('<div class="but" onclick="CompositionRunner.run({0});">{0}</div>'.format(file));
     });
 
-    $('#tests').html(html.join(""));
+    $('#comps').html(html.join(""));
+}
 
-    setTimeout('CompositionRunner.run(24)',1000);
+$(document).ready(function() {
+    $('.control')
+        .mouseover(cshow)
+        .mouseout(chide)
+        .click(function() { hidden ? cshow() : chide(); });
 
+    initRunner();
+    resize();
     cshow();
+
+    /* run comp 24 by default */
+    setTimeout('CompositionRunner.run(24)',1000);
 });
