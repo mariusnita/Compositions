@@ -1,31 +1,36 @@
 var anim = null;
-var opts = {};
-
-function hideCover() {
-    $('.what').hide();
-    $('#coverImg').hide();
-    $('#myCanvas').show();
-}
-
-function what() {
-    $('.what').show();
-}
+var opts = {menu: true};
 
 var names = {
     play : ['play','pause'],
     distrib : ['spread','focal'],
     cols : ['colors','mono'],
     flyToTheLight : ['attract','radiate'],
-    bound : ['bound','unbound']
+    bound : ['bound','unbound'],
+    mouse : ['mouse','unmouse']
 };
 
-$(document).ready(function() {
-    $('#coverImg,.what').click(function() { 
-        hideCover(); 
-        restart(); 
-    });
+// yet unused
+function menuShow() {
+    $('.hid').show();
+    $('.first').css('border-radius', '5px 5px 0px 0px');
+}
 
-    var canvas = document.getElementById("myCanvas");
+function menuHide() {
+    setTimeout(function() { 
+        if (!opts.menu) { 
+            $('.hid').hide();
+            $('.first').css('border-radius', '5px');
+        } 
+    }, 200);
+}
+
+
+$(document).ready(function() {
+    var canvas = document.getElementById("focalCanvas");
+
+    canvas.width = $(window).width();
+    canvas.height = $(window).height();
 
     anim = new Focal(canvas);
     anim.init();
@@ -34,6 +39,9 @@ $(document).ready(function() {
         $('#' + k).html(names[k][0]);
     }
 
+    // $(document).on('mouseenter', '.first,.hid', menuShow);
+    // $(document).on('mouseleave', '.first,.hid', menuHide);
+    
     $(document).on('keydown',document,function(evt) {
         if (evt.keyCode === 83) { // p
             startStop();
@@ -50,14 +58,19 @@ $(document).ready(function() {
         if (evt.keyCode === 65) { // a
             flyToTheLight();
         }
+        if (evt.keyCode === 77) { // m
+            mouse();
+        }
+        if (evt.keyCode === 78) { // m
+            menu();
+        }
     });
+    restart();
 });
 
 var started = false;
 
 function startStop() {
-    hideCover();
-
     if (started) { 
         anim.stop(); 
     }
@@ -70,18 +83,20 @@ function startStop() {
     $('#play').html(names.play[0 + started]);
 }
 
-function doOpt(prop,dontStop) {
+function doOpt(prop) {
     var dist = (opts[prop] === true);
 
     opts[prop] = !opts[prop];
     $('#' + prop).html(names[prop][0+opts[prop]]);
+
+    opts.menu ? menuShow() : menuHide();
+
     anim.setOpts(opts);
 }
 
 function restart() {
     var type = $('input[name=restart_type]:checked').val();
 
-    hideCover();
     started = false;
     anim.stop();
     opts.distrib = type === 'cover';
@@ -91,13 +106,22 @@ function restart() {
 }
 
 function cols() {
-    doOpt('cols',true);
+    doOpt('cols');
 }
 
 function bound() {
-    doOpt('bound',true);
+    doOpt('bound');
 }
 
 function flyToTheLight() {
-    doOpt('flyToTheLight',true);
+    doOpt('flyToTheLight');
+}
+
+function mouse() {
+    doOpt('mouse');
+}
+
+// unused
+function menu() {
+    doOpt('menu');
 }

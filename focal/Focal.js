@@ -1,8 +1,9 @@
 function Focal(ctx) {
     Composition.call(this, ctx);
     this.opts = {};
-    this.bwCurColor = '#000';
+    this.bwCurColor = '#222';
     this.mouseIn = false;
+    this.started = false;
 }
 
 Focal.prototype = clone(Composition.prototype);
@@ -10,7 +11,7 @@ Focal.prototype = clone(Composition.prototype);
 Focal.prototype.runFunc = function(pt) {
     var m = this.mouse;
 
-    if (this.opts.flyToTheLight && this.mouseIn) {
+    if (this.opts.flyToTheLight && this.mouseIn && this.opts.mouse) {
         var distx = Math.abs(pt.x-m.x);
         var disty = Math.abs(pt.y-m.y);
 
@@ -35,8 +36,6 @@ Focal.prototype.runFunc = function(pt) {
         }
     }
 
-    //this.strokeRect(pt.x,pt.y,5,5,pt.color);
-
     if (pt.dir === 0) {
         pt.y --;
     }
@@ -51,7 +50,7 @@ Focal.prototype.runFunc = function(pt) {
     }
 
 
-    if (this.mouseIn) {
+    if (this.mouseIn && this.opts.mouse) {
         this.drawLine(pt.x,pt.y,m.x,m.y,pt.color);
     }
 
@@ -84,7 +83,7 @@ Focal.prototype.doNext = function() {
 };
 
 Focal.prototype.bwColor = function() {
-    this.bwCurColor = this.bwCurColor === '#000' ? '#fff' : '#000';
+    this.bwCurColor = this.bwCurColor === '#222' ? '#eee' : '#222';
     return this.bwCurColor;
 };
 
@@ -96,6 +95,8 @@ Focal.prototype.setOpts = function(opts) {
 };
 
 Focal.prototype.init = function() {
+    this.started = true;
+
     this.w = this.ctx.canvas.width;
     this.h = this.ctx.canvas.height;
 
@@ -105,8 +106,8 @@ Focal.prototype.init = function() {
 
     for (var i = 0; i < this.w; i += 80) {
         for (var j = 0; j < this.h; j += 80) {
-            var x = this.opts.distrib ? i : this.w/2;
-            var y = this.opts.distrib ? j : this.h/2;
+            var x = this.opts.distrib ? i : Math.floor(this.w/2);
+            var y = this.opts.distrib ? j : Math.floor(this.h/2);
             var colr = this.opts.cols ? this.getColor() : this.bwColor();
 
             var p = {
@@ -141,6 +142,7 @@ Focal.prototype.init = function() {
 };
 
 Focal.prototype.run = function() {
-    this.init();
+    if (!this.started)
+        this.init();
     this.doNext();
 };

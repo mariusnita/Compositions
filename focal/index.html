@@ -9,45 +9,42 @@
     <script type="text/javascript" src="FocalUI.js"></script>
   </head>
   <body>
-    <a href="http://mariusnita.com/digi.html">&lt back to mariusnita.com</a>
-
-    <table style="padding-top: 40px;">
-      <tr style="vertical-align: top;">
-        <td style="100px">
-          <div class="opt" onclick="restart()">
-            restart (r)
-            <div style="text-align: left;margin-top:5px">
-              <input id="b2" type="radio" name="restart_type" value="focal" checked="checked"></input>
-              <label for="b2">focal</label><br/>
-              <input id="b1" type="radio" name="restart_type" value="cover"></input>
-              <label for="b1">cover</label>
-            </div>
+    <div class="container">
+      <div class="canvasContainer">
+        <canvas id="focalCanvas"></canvas>
+      </div>
+      <div class="nav">
+        <div class="opt first">
+          <h2>Focal</h2>
+        </div>
+        <div class="opt hid" onclick="restart()">
+          restart (r)
+          <div style="text-align: left;margin-top:5px">
+            <input id="b2" type="radio" name="restart_type" value="focal" checked="checked"></input>
+            <label for="b2">focal</label><br/>
+            <input id="b1" type="radio" name="restart_type" value="cover"></input>
+            <label for="b1">cover</label>
           </div>
-          <div class="opt" onclick="startStop()">
-            <span id="play"></span> (s)
-          </div>
-          <div class="opt" onclick="cols()">
-            <span id="cols"></span> (c)
-          </div>
-          <div class="opt" onclick="flyToTheLight()">
-            <span id="flyToTheLight"></span> (a)
-          </div>
-          <div class="opt" onclick="bound()">
-            <span id="bound"></span> (x)
-          </div>
-          <!-- <div class="opt" onclick="what()"> -->
-          <!--   what -->
-          <!-- </div> -->
-        </td>
-        <td>
-          <div style="position: relative;">
-            <img id="coverImg" src="cover.jpg" style="cursor: pointer;"/>
-            <canvas id="myCanvas" width="1300" height="800" style="cursor:crosshair;display:none;"></canvas>
-            <div class="what">
-            </div>
-          </div>
-        </td>
-      </tr>
-    </table>
+        </div>
+        <div class="opt hid" onclick="startStop()">
+          <span id="play"></span> (s)
+        </div>
+        <div class="opt hid" onclick="cols()">
+          <span id="cols"></span> (c)
+        </div>
+        <div class="opt hid" onclick="bound()">
+          <span id="bound"></span> (x)
+        </div>
+        <div class="opt hid" onclick="mouse()">
+          <span id="mouse"></span> (m)
+        </div>
+        <div class="opt hid" onclick="flyToTheLight()">
+          <span id="flyToTheLight"></span> (a)
+        </div>
+        <div class="opt hid last">
+          <a href="http://mariusnita.com/digi.html">&lt go back</a>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

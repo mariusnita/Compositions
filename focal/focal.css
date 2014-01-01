@@ -1,38 +1,63 @@
-.opt {
+.container .nav .opt {
     text-align: center;
     width: 80px;
-    height: 80px;
     padding: 10px;
-    margin: 10px;
-    background-color: #222;
     cursor: pointer;
+    border-bottom: 1px solid #bbb;
 }
 
 a {
-    color: #666; 
+    color: #eee; 
     cursor: pointer; 
+    text-decoration: none;
 }
 
 body { 
+    margin: 0;
     text-align: left;
     font-family: courier;
     font-size: 12px;
-    background-color: #111; 
     padding-bottom:50px; 
     color: #666;
 }
 
-.what {
-    display:none;
-    width: 630px;
-    top: 50%;
-    left: 50%;
-    margin-top: -300px;
-    margin-left: -315px;
-    background-color: rgba(0,0,0,0.85);
-    position: absolute;
-    padding: 20px;
-    text-align: left;
-    font-size: 14px;
-    line-height: 20px;
+.container {
+    position: relative;
 }
+
+.container .canvasContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+}
+
+.container .nav {
+    margin-left: 5px;
+    margin-top: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 30;
+    border-radius: 5px;
+    background-color: rgba(255,255,255,0.8);
+}
+
+.container .nav .last {
+    border: none;
+    border-radius: 0px 0px 5px 5px;
+    background-color: rgba(20,100,255,0.8); 
+    color: #ccc;
+}
+
+.container .nav .first {
+    border: none;
+    background: rgba(20,100,255,0.8); 
+    color: #eee;
+    border-radius: 5px 5px 0px 0px;
+}
+
+h2 {
+    margin: 0;
+}
+
