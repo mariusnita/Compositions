@@ -6,7 +6,7 @@ function Composition7(ctx) {
 Composition7.prototype = clone(Composition.prototype);
 
 Composition7.prototype.runFunc = function(x) {
-    for (var y = 790; y < 800; ++y) { 
+    for (var y = this.height - 10; y < this.height; ++y) { 
         this.drawCircle(Math.cos(y)*x,Math.cos(x)*y,5); 
     }
 };
@@ -23,12 +23,13 @@ Composition7.prototype.endLoop = function() {
 Composition7.prototype.run = function() {
     this.blank();
     var timeout=100;
+
     for (var x = 0; x < this.width; x += 1) {
         var t = this.setTimeout(this.objectExpr() + ".runFunc(" + x + ")", timeout);
-        this.timeouts.push(t);
         timeout+=20;
     }
-    var t = this.setTimeout(this.objectExpr() + ".endLoop()",timeout);
+
+    this.setTimeout(this.objectExpr() + ".endLoop()",timeout);
 };
 
 
