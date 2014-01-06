@@ -4,7 +4,7 @@ var opts = {menu: true};
 var names = {
     play : ['play','pause'],
     distrib : ['spread','focal'],
-    cols : ['colors','mono'],
+    cols : ['mono','colors'],
     flyToTheLight : ['attract','radiate'],
     bound : ['bound','unbound'],
     mouse : ['mouse','unmouse']
@@ -100,6 +100,7 @@ function restart() {
     started = false;
     anim.stop();
     opts.distrib = type === 'cover';
+    opts.cols = true;
     anim.setOpts(opts);
     anim.init();
     startStop();
