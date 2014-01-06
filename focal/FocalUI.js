@@ -115,13 +115,13 @@ var FocalUI = (function() {
         
         $(document).on('keydown',document,function(evt) {
             switch (evt.keyCode) {
-                case 83: return startStop(); // p
-                case 82: return restart(); // r
-                case 67: return cols(); // c
-                case 88: return bound(); // x
-                case 65: return flyToTheLight(); //a
-                case 77: return mouse(); // m
-                case 78: return menu(); // n
+            case 83: return startStop(); // p
+            case 82: return restart(); // r
+            case 67: return cols(); // c
+            case 88: return bound(); // x
+            case 65: return flyToTheLight(); //a
+            case 77: return mouse(); // m
+            case 78: return nomenu(); // n
             }
             return null;
         });
