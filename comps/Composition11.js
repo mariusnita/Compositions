@@ -11,7 +11,7 @@ Composition11.prototype.runFunc = function(x,y) {
         circleColor = '#993322';
     }
 
-    this.drawCircle(this.width/2,this.height/2,50,circleColor);
+    this.fillCircle(this.width/2,this.height/2,50,circleColor);
 
     this.computeColors(0,50,5);
 

@@ -16,16 +16,16 @@ Composition3.prototype.runFunc = function(x) {
     var h = this.height;
 
     for (var i = 0; i < w; i += 2) {
-        this.drawCircle(w-i, h-Math.sin(i)*x, 5);
-        this.drawCircle(w-i, h-Math.cos(i)*x, 5);
-        this.drawCircle(i, Math.sin(i)*x, 5);
-        this.drawCircle(i, Math.cos(i)*x, 5);
+        this.fillCircle(w-i, h-Math.sin(i)*x, 5);
+        this.fillCircle(w-i, h-Math.cos(i)*x, 5);
+        this.fillCircle(i, Math.sin(i)*x, 5);
+        this.fillCircle(i, Math.cos(i)*x, 5);
     }
     for (i = 0; i < h; i += 2) {
-        this.drawCircle(w-Math.sin(i)*x, h-i, 5);
-        this.drawCircle(w-Math.cos(i)*x, h-i, 5);
-        this.drawCircle(Math.sin(i)*x, i, 5);
-        this.drawCircle(Math.cos(i)*x, i, 5);
+        this.fillCircle(w-Math.sin(i)*x, h-i, 5);
+        this.fillCircle(w-Math.cos(i)*x, h-i, 5);
+        this.fillCircle(Math.sin(i)*x, i, 5);
+        this.fillCircle(Math.cos(i)*x, i, 5);
     }
 };
 

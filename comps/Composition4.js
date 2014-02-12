@@ -8,7 +8,7 @@ Composition4.prototype = clone(Composition.prototype);
 Composition4.prototype.runFunc = function(x) {
     this.blank();
     for (var y = 0; y < this.width; ++y) { 
-        this.drawCircle(y,Math.cos(y)*x,5); 
+        this.fillCircle(y,Math.cos(y)*x,5); 
     }
 };
 

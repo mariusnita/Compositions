@@ -35,8 +35,8 @@ Composition21.prototype.runFunc = function() {
     pts.forEach(function(p) {
         var c = this.getColor();
         for (var x = 0; x < 10; ++x) {
-            this.drawCircle(x*x/10*20+p.x,x*10+p.y - max_y,4,c);
-            this.drawCircle(x*x/10*20+p.x,-x*10+p.y - max_y,4,c);
+            this.fillCircle(x*x/10*20+p.x,x*10+p.y - max_y,4,c);
+            this.fillCircle(x*x/10*20+p.x,-x*10+p.y - max_y,4,c);
         }
     }.bind(this));
 };

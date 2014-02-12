@@ -13,7 +13,7 @@ Composition20.prototype.runFunc = function() {
 
     for (var i = 0.0; i < h; i += 1) {
         var x = i;
-        this.drawCircle(Math.sin((x+this.i)/(10 * Math.sqrt(x/10000)))*(5+(x/5)) + w*(1/3), i, 2,'white');
-        this.drawCircle(Math.sin((x+this.i/10)/(10 * Math.sqrt(x/10000)))*(10) + w*(2/3), i, 2,'white');
+        this.fillCircle(Math.sin((x+this.i)/(10 * Math.sqrt(x/10000)))*(5+(x/5)) + w*(1/3), i, 2,'white');
+        this.fillCircle(Math.sin((x+this.i/10)/(10 * Math.sqrt(x/10000)))*(10) + w*(2/3), i, 2,'white');
     }
 };

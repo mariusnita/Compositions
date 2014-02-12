@@ -6,12 +6,12 @@ Composition13.prototype = clone(Composition.prototype);
 
 Composition13.prototype.runFunc = function() {
     this.blank();
-    this.drawCircle(1200,900,600,'#222');
+    this.fillCircle(1200,900,600,'#222');
 
     this.strokeCircle(1200,900,600,3,'#333');
     this.strokeCircle(1200,900,602,1,'#fff');
 
-    this.drawCircle(this.star.x, this.star.y, this.star.size, '#222');
+    this.fillCircle(this.star.x, this.star.y, this.star.size, '#222');
     this.strokeCircle(this.star.x, this.star.y, this.star.size, 1, '#333');
     this.advanceStar();
 

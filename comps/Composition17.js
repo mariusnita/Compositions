@@ -12,8 +12,8 @@ Composition17.prototype.runFunc = function() {
     this.i++;
     var col = this.getColor();
     for (var i = 0.0; i < this.ctx.canvas.width; i += 1) {
-        this.drawCircle(i, Math.sin(i/10)*(this.i*(i/100)) + this.ctx.canvas.height/2, 2,col);
-        this.drawCircle(this.ctx.canvas.width-i, Math.sin(i/10)*(this.i*(i/100)) + this.ctx.canvas.height/2, 2,col);
+        this.fillCircle(i, Math.sin(i/10)*(this.i*(i/100)) + this.ctx.canvas.height/2, 2,col);
+        this.fillCircle(this.ctx.canvas.width-i, Math.sin(i/10)*(this.i*(i/100)) + this.ctx.canvas.height/2, 2,col);
     }
 };
 

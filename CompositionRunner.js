@@ -1,46 +1,46 @@
-var CompositionRunner = {};
+var CompositionRunner = {
+    files : _.difference(_.range(1,28), [1,2,8,9,10,22]),
+    objs : {},
+    exclusive : true,
 
-CompositionRunner.files = _.difference(_.range(1,26), [1,2,8,9,10,22]);
+    loadJs : function(filename) {
+        var fileref = document.createElement('script');
+        fileref.setAttribute("type","text/javascript");
+        fileref.setAttribute("src", filename);
+        document.head.appendChild(fileref);
+    },
 
-CompositionRunner.loadJs = function(filename) {
-    var fileref = document.createElement('script');
-    fileref.setAttribute("type","text/javascript");
-    fileref.setAttribute("src", filename);
-    document.head.appendChild(fileref);
-};
+    getCanvas : function() { 
+        var canvas = document.getElementById("myCanvas");
+        return canvas;
+    },
 
-CompositionRunner.getCanvas = function() { 
-    var canvas = document.getElementById("myCanvas");
-    return canvas;
-};
 
-CompositionRunner.objs = {};
-CompositionRunner.exclusive = true;
+    run : function(x) {
+        var key = 'Composition'+x;
 
-CompositionRunner.run = function(x) {
-    var key = 'Composition'+x;
-
-    if (typeof CompositionRunner.objs[key] == 'undefined') {
-        var comp = window[key];
-        var t = new window[key](CompositionRunner.getCanvas());
-        CompositionRunner.objs[key] = t;
-    }
-
-    if (CompositionRunner.exclusive) {
-        CompositionRunner.stopAll();
-    }
-
-    CompositionRunner.objs[key].run();
-};
-
-CompositionRunner.stopAll = function() {
-    _.each(_.values(CompositionRunner.objs), function(val) {
-        if (typeof val === 'object') {
-            val.stop();
+        if (typeof this.objs[key] == 'undefined') {
+            var comp = window[key];
+            var t = new window[key](this.getCanvas());
+            this.objs[key] = t;
         }
-    });
-};
 
-CompositionRunner.setExclusive = function(t) {
-    CompositionRunner.exclusive = t;
+        if (this.exclusive) {
+            this.stopAll();
+        }
+
+        this.objs[key].run();
+    },
+
+    stopAll : function() {
+        _.each(_.values(this.objs), function(val) {
+            if (typeof val === 'object') {
+                val.stop();
+            }
+        });
+    },
+
+    setExclusive : function(t) {
+        this.exclusive = t;
+    }
 };
