@@ -1,4 +1,4 @@
-a { color: #666; cursor: pointer; }
+a { color: #ccc; cursor: pointer; }
 
 html {
     padding: 0;
@@ -17,11 +17,7 @@ body {
 .control {
     position: fixed;
     z-index: 2;
-    background-color: rgba(255,255,255,0.7);
-    border-left: 1px solid #aaa;
-    border-right: 1px solid #aaa;
-    border-bottom: 1px solid #aaa;
-    border-radius: 10px;
+    background-color: rgba(60,60,60,0.9);
     padding: 10px;
     padding-top: 10px;
     left: 50%;
@@ -34,10 +30,14 @@ body {
     cursor: pointer;
     width: 30px;
     margin: 4px;
-    color: #333;
+    color: #ddd;
     font-family: helvetica;
     font-size: 12px;
     float: left;
+}
+
+.active {
+    text-decoration: underline;
 }
 
 canvas {

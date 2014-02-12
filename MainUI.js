@@ -1,42 +1,54 @@
-var hidden = true;
+var MainUI = {
+    cshow : function() { 
+        $('.control').css('top', -20); 
+    },
 
-function cshow() { 
-    $('.control').css('top', -20); 
-    hidden = false; 
-}
+    chide : function() { 
+        $('.control').css('top',  -8 - $('.control').height()); 
+    },
 
-function chide() { 
-    $('.control').css('top',  - 8 - $('.control').height()); 
-    hidden = true; 
-}
+    resize : function() {
+        $('#myCanvas')
+            .attr('width',$(window).width())
+            .attr('height',$(window).height());
+    },
 
-function resize() {
-    $('#myCanvas')
-        .attr('width',$(window).width())
-        .attr('height',$(window).height());
-}
+    initRunner: function() {
+        var html = [];
 
-function initRunner() {
-    var html = [];
+        _.each(CompositionRunner.files, function(file) {
+            CompositionRunner.loadJs('comps/Composition{0}.js'.format(file));
+            html.push('<div id="c{0}" class="but" onclick="MainUI.runComposition({0})">{0}</div>'.format(file));
+        });
 
-    _.each(CompositionRunner.files, function(file) {
-        CompositionRunner.loadJs('comps/Composition{0}.js'.format(file));
-        html.push('<div class="but" onclick="CompositionRunner.run({0});">{0}</div>'.format(file));
-    });
+        $('#comps').html(html.join(""));
+    },
 
-    $('#comps').html(html.join(""));
-}
+    runComposition : function(id) {
+        $('.active').removeClass('active');
+        $('#c{0}'.format(id)).addClass('active');
+        CompositionRunner.run(id);
+    },
 
-$(document).ready(function() {
-    $('.control')
-        .mouseover(cshow)
-        .mouseout(chide)
-        .click(function() { hidden ? cshow() : chide(); });
+    stopAll: function() {
+        $('.active').removeClass('active');
+        CompositionRunner.stopAll();
+    },
 
-    initRunner();
-    resize();
-    cshow();
+    init: function() {
+        $(document).ready(function() {
+            $('.control')
+                .mouseover(this.cshow)
+                .mouseout(this.chide);
 
-    /* run comp 24 by default */
-    setTimeout('CompositionRunner.run(24)',1000);
-});
+            this.initRunner();
+            this.resize();
+            this.cshow();
+
+            /* run comp 24 by default */
+            setTimeout('MainUI.runComposition(24)',1000);
+        }.bind(this));
+    }
+};
+
+MainUI.init();
