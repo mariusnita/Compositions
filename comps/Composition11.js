@@ -31,9 +31,13 @@ Composition11.prototype.run = function() {
     this.blank();
     var timeout = 50;
     var multiplier = this.height/this.width;
-    for (var x = 0; x < this.width/2; ++x) {
-        var y = x * multiplier;
-        this.setTimeout(this.objectExpr() + '.runFunc(' + x + ',' + y + ')', timeout);
-        timeout += 50;
+
+    var $this = this;
+    for (var x = 0, y = 0; x < this.width/2; ++x, timeout += 50, y = x * multiplier) {
+        (function(x,y,timeout) {
+            $this.setTimeout(function() {
+                $this.runFunc(x,y);
+            }, timeout);
+        })(x,y,timeout);   
     }
 };

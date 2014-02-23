@@ -82,20 +82,38 @@ Composition6.prototype.run = function() {
     this.blank();
     var timeout = 100;
     var j = 0;
+
+    var $this = this;
+
     for (var i = 0; i < 100; ++i) {
-        this.setTimeout(this.objectExpr() + ".drawCurve(" + j + "," + (i * 1000) + ")", timeout);
+        (function(i,j,timeout) {
+            $this.setTimeout(function() {
+                $this.drawCurve(j, i*1000);
+            }, timeout);
+        })(i,j,timeout);
+
+        timeout+= 40;
         j = i * 1000;
-        timeout += 40;
     }
 
     for (var z = 1; z < 9; ++z) {
-        this.setTimeout(this.objectExpr() +".drawWave(" + z + ")", timeout);
+        (function(z,timeout) {
+            $this.setTimeout(function() {
+                $this.drawWave(z);
+            }, timeout);
+        })(z,timeout);
+
         timeout += 40;
     }
-    j = 0;
-    for (i = 0; i < this.width; ++i) {
-        this.setTimeout(this.objectExpr() + ".runFunc(" + j + "," + (i * 1000) + ")", timeout);
+
+    for (i = 0, j = 0; i < this.width; ++i) {
+        (function(i,j,timeout) {
+            $this.setTimeout(function() {
+                $this.runFunc(j, i*1000);
+            }, timeout);
+        })(i,j,timeout);
+
+        timeout+= 40;
         j = i * 1000;
-        timeout += 40;
     }
 };

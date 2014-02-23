@@ -14,8 +14,14 @@ Composition4.prototype.runFunc = function(x) {
 
 Composition4.prototype.run = function() {
     var timeout=100;
+    var $this = this;
     for (var x = 0; x < this.width; x += 1) {
-        var t = this.setTimeout(this.objectExpr() + ".runFunc(" + x + ")", timeout);
+        (function(x, timeout) {
+            $this.setTimeout(function() {
+                $this.runFunc(x);
+            }, timeout);
+        })(x, timeout);
+
         timeout+=50;
     }
 };

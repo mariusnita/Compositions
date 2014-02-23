@@ -31,9 +31,15 @@ Composition3.prototype.runFunc = function(x) {
 
 Composition3.prototype.run = function() {
     var timeout=100;
+    var $this = this;
 
     for (var x = 0; x < 8000; x += 5) {
-        this.setTimeout("{0}.runFunc({1})".format(this.objectExpr(), x), timeout);
+        (function(x, timeout) {
+            $this.setTimeout(function() {
+                $this.runFunc(x);
+            }, timeout);
+        })(x,timeout);
+
         timeout+=50;
     }    
 };

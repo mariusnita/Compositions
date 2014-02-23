@@ -23,8 +23,14 @@ Composition14.prototype.run = function() {
     this.blank();
     var timeout = 50;
     this.computeColors(100,200,1);
-    for (var x = 0; x < this.width; ++x) {
-        this.setTimeout(this.objectExpr() + '.runFunc(' + x + ')', timeout);
-        timeout += 10;
+
+    var $this = this;
+
+    for (var x = 0; x < this.width; ++x, timeout+=10) {
+        (function(x,timeout) {
+            $this.setTimeout(function() {
+                $this.runFunc(x);
+            }, timeout);
+        })(x,timeout);
     }
 };

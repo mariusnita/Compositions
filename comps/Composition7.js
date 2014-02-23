@@ -15,9 +15,13 @@ Composition7.prototype.run = function() {
     this.blank();
     var timeout=100;
 
-    for (var x = 0; x < this.width; x += 1) {
-        var t = this.setTimeout(this.objectExpr() + ".runFunc(" + x + ")", timeout);
-        timeout+=20;
+    var $this = this;
+    for (var x = 0; x < this.width; x += 1, timeout += 20) {
+        (function(x,timeout) {
+            $this.setTimeout(function() {
+                $this.runFunc(x);
+            }, timeout);
+        })(x,timeout);
     }
 };
 

@@ -118,7 +118,7 @@ Composition15.prototype.mixColor = function(i,j,k,itup) {
 
 Composition15.prototype.doNext = function() {
     this.runFunc(this.getColor(),this.getColor());
-    this.setTimeout(this.objectExpr() + '.doNext()', 100);
+    this.setTimeout(this.doNext.bind(this), 100);
 };
 
 Composition15.prototype.computeGrid = function() {
@@ -185,15 +185,17 @@ Composition15.prototype.doCircle = function(x) {
     radgrad4.addColorStop(1, 'black');
 
     this.fillCircle(xcenter,ycenter, x, radgrad4);
-
-    this.rects.forEach(function(rect) {
-        this.fillCircle(rect.p1.x, rect.p1.y, 1, 'blue');
-    }.bind(this));
 };
 
 Composition15.prototype.runCircle = function(max) {
+    var $this = this;
+
     for (var x = 1; x <= max; ++x) {
-        this.setTimeout(this.objectExpr() + '.doCircle(' + x + ')', 10 * x * (Math.sqrt(x/100)));
+        (function(x) {
+            $this.setTimeout(function() {
+                $this.doCircle(x);
+            }, 10 * x * Math.sqrt(x/100));
+        })(x);
     }
 };
 

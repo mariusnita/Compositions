@@ -53,8 +53,15 @@ Composition5.prototype.runFunc = function(prevV,v) {
 Composition5.prototype.run = function() {
     var timeout = 100;
     var j = 0;
+
+    var $this = this;
     for (var i = 0; i < this.width; ++i) {
-        this.setTimeout(this.objectExpr() + ".runFunc(" + j + "," + (i * 1000) + ")", timeout);
+        (function(i,j,timeout) {
+            $this.setTimeout(function() {
+                $this.runFunc(j, i*1000);
+            }, timeout);
+        })(i,j,timeout);
+
         j = i * 1000;
         timeout += 40;
     }

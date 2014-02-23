@@ -15,9 +15,11 @@ Composition16.prototype.setup = function() {
     this.pb = 0;
 };
 
-Composition16.prototype.runFunc = function(white, black) {
-    var startColor = white;
-    var color = white;
+Composition16.prototype.runFunc = function() {
+    var white = '#bbb',
+        black = '#985',
+        startColor = white,
+        color = black;
 
     function nextColor() {
         color = color === black ? white : black;
@@ -77,17 +79,14 @@ Composition16.prototype.runFunc = function(white, black) {
         this.ctx.fill();
         this.ctx.fillStyle = oldC;
     }.bind(this));
+
+    this.setTimeout(this.runFunc.bind(this), 100);
 };
 
 Composition16.prototype.mixColor = function(i,j,k,itup) {
     //return 'rgb(' + i + ',' + j + ',' + k + ')';
     return 'rgb(' + k + ',' + k + ',' + ((k*k)% itup) + ')';
     //return 'rgb(255,255,255)';
-};
-
-Composition16.prototype.doNext = function() {
-    this.runFunc('#bbb','#985');
-    this.setTimeout(this.objectExpr() + '.doNext()', 100);
 };
 
 Composition16.prototype.computeGrid = function() {
@@ -151,5 +150,5 @@ Composition16.prototype.run = function() {
     this.computeGrid();
     this.computeColors(100,101,1);
     
-    this.doNext();
+    this.runFunc();
 };

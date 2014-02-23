@@ -23,7 +23,7 @@ Composition26.prototype.runFunc = function() {
         }
     }
 
-    this.setTimeout('{0}.runFunc()'.format(this.objectExpr()), 40);
+    this.setTimeout(this.runFunc.bind(this), 40);
 };
 
 Composition26.prototype.disturbPoints = function() {
@@ -32,7 +32,7 @@ Composition26.prototype.disturbPoints = function() {
     else
         this.pt1.x -= 0.1;
 
-    this.setTimeout('{0}.disturbPoints()'.format(this.objectExpr()), 10);
+    this.setTimeout(this.disturbPoints.bind(this), 10);
 };
 
 Composition26.prototype.run = function() {

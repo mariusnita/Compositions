@@ -20,8 +20,12 @@ Composition12.prototype.run = function() {
     this.blank();
 
     var timeout = 50;
-    for (var x = 0; x < 400; ++x) {
-        this.setTimeout(this.objectExpr() + '.runFunc(' + x + ')', timeout);
-        timeout += 50;
+    var $this = this;
+    for (var x = 0; x < 400; ++x, timeout += 50) {
+        (function(x,timeout) {
+            $this.setTimeout(function() {
+                $this.runFunc(x);
+            }, timeout);
+        })(x,timeout);
     }
 }

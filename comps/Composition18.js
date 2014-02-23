@@ -52,7 +52,7 @@ Composition18.prototype.mixColor = function(i,j,k,itup) {
 
 Composition18.prototype.doNext = function() {
     this.runFunc();
-    this.setTimeout(this.objectExpr() + '.doNext()', 100);
+    this.setTimeout(this.doNext.bind(this), 100);
 };
 
 

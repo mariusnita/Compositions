@@ -45,7 +45,7 @@ Composition24.prototype.runFunc = function() {
 
     //this.fillCircle(this.x,this.y,5,'black');
 
-    this.setTimeout(this.objectExpr() + '.runFunc()');
+    this.setTimeout(this.runFunc.bind(this));
 };
 
 Composition24.prototype.run0 = function() {

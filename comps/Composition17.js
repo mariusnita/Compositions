@@ -15,9 +15,10 @@ Composition17.prototype.runFunc = function() {
         this.fillCircle(i, Math.sin(i/10)*(this.i*(i/100)) + this.ctx.canvas.height/2, 2,col);
         this.fillCircle(this.ctx.canvas.width-i, Math.sin(i/10)*(this.i*(i/100)) + this.ctx.canvas.height/2, 2,col);
     }
+    this.setTimeout(this.runFunc.bind(this), 100);
 };
 
-function oscillator(x,y) {
+Composition17.prototype.oscillator = function(x,y) {
     var up = true;
     var i = x;
     return function() {
@@ -37,24 +38,18 @@ function oscillator(x,y) {
             }
         }
     };
-}
+};
 
 Composition17.prototype.mixColor = function(i,j,k,itup) {
     return 'rgb(' + i + ',' + j + ',' + k + ')';
 };
-
-Composition17.prototype.doNext = function() {
-    this.runFunc();
-    this.setTimeout(this.objectExpr() + '.doNext()', 100);
-};
-
 
 Composition17.prototype.run = function() {
     this.setup();
     this.blank('#000');
     this.computeColors(100,200,1);
     this.i = 1;
-    this.f = oscillator(10,10);
+    this.f = this.oscillator(10,10);
     
-    this.doNext();
+    this.runFunc();
 };

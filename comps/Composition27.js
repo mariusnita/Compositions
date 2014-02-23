@@ -19,7 +19,9 @@ Composition27.prototype = _.extend(clone(Composition.prototype), {
             }
         }
 
-        this.setTimeout('{0}.runFunc()'.format(this.objectExpr()), 40);
+        this.setTimeout(function() {
+            this.runFunc();
+        }.bind(this), 40);
     },
 
     disturbPoints : function() {
@@ -30,12 +32,13 @@ Composition27.prototype = _.extend(clone(Composition.prototype), {
                 this.points[p].x -= 0.1;
         }
 
-        this.setTimeout('{0}.disturbPoints()'.format(this.objectExpr()), 10);
+        this.setTimeout(function() {
+            this.disturbPoints();
+        }.bind(this), 10);
     },
 
     run : function() {
         this.bg = 'white';
-        this.line = 'green';
         this.x = 10;
 
         this.mouse = this.randomPoint();

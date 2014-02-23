@@ -36,7 +36,7 @@ Composition25.prototype.runFunc = function() {
         this.blank('rgba(255,255,255,0.01)');
     }
 
-    this.setTimeout(this.objectExpr() + '.runFunc()');
+    this.setTimeout(this.runFunc.bind(this));
 };
 
 Composition25.prototype.init = function() {

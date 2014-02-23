@@ -20,7 +20,7 @@ Composition13.prototype.runFunc = function() {
         this.advanceLine(this.lines[x]);
     }
 
-    this.setTimeout(this.objectExpr() + ".runFunc()", 20);
+    this.setTimeout(this.runFunc.bind(this), 20);
 };
 
 Composition13.prototype.advanceLine = function(l) {
@@ -56,5 +56,5 @@ Composition13.prototype.run = function() {
         p += 20;
     }
     // this.computeColors(20,180,10);
-    this.setTimeout(this.objectExpr() + ".runFunc()", 20);
+    this.setTimeout(this.runFunc.bind(this), 50);
 };

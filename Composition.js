@@ -160,9 +160,13 @@ Composition.prototype = {
 
     randomPoint : function() {
         return {
-            x : Math.floor(Math.random() * this.width),
-            y : Math.floor(Math.random() * this.height)
+            x : this.randomInt(this.width),
+            y : this.randomInt(this.height)
         };
+    },
+
+    randomInt : function(i) {
+        return Math.floor(Math.random() * i);
     },
 
     getMousePos : function(evt) {
