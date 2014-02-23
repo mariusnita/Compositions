@@ -15,7 +15,11 @@ Composition17.prototype.runFunc = function() {
         this.fillCircle(i, Math.sin(i/10)*(this.i*(i/100)) + this.ctx.canvas.height/2, 2,col);
         this.fillCircle(this.ctx.canvas.width-i, Math.sin(i/10)*(this.i*(i/100)) + this.ctx.canvas.height/2, 2,col);
     }
-    this.setTimeout(this.runFunc.bind(this), 100);
+};
+
+Composition17.prototype.nextStep = function() {
+    this.runFunc();
+    this.setTimeout(this.nextStep.bind(this), 100);
 };
 
 Composition17.prototype.oscillator = function(x,y) {
@@ -51,5 +55,5 @@ Composition17.prototype.run = function() {
     this.i = 1;
     this.f = this.oscillator(10,10);
     
-    this.runFunc();
+    this.nextStep();
 };
