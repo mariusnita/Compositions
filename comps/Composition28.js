@@ -5,33 +5,15 @@ function Composition28(ctx) {
 
 Composition28.prototype = _.extend(clone(Composition.prototype), {
     run : function() {
-        // var g = Gradient.multiGradient('#fff', [
-        //     { color: '#bf3', steps: 40 },
-        //     { color: '#fab', steps: 100 },
-        //     { color: '#444', steps: 30 },
-        //     { color: '#961', steps: 50 },
-        //     { color: '#fff', steps: 100 },
-        //     { color: '#39f', steps: 50 },
-        //     { color: '#000', steps: 100 }
-        // ]);
-
-        // var x = 0;
-
-        // g.forEach(function(color) {
-        //     this.fillRect(x++ * 4, 0, 4, 400, color);
-        // }.bind(this));
-
         this.level = 0;
-        this.blank('#000');
 
-        this.cols = Gradient.gradient('#000','#ab8',8);
-
+        this.colors = Gradient.gradient('#000','#ab8',8);
+        this.colors = Gradient.gradient('#53e3ff','#000e4a',16);
         //this.colors = ['black','white'];
 
         this.doQuad(0, 0, this.width, this.height, 0);
 
-
-        //this.flag = true;
+        this.flag = true;
         //this.runFunc();
     },
 
@@ -52,20 +34,20 @@ Composition28.prototype = _.extend(clone(Composition.prototype), {
 
         //this.fillCircle(x+width/2+perturbX1,y+height/2+perturbY1,height/2,this.cols[level]);
 
-        this.fillRect(x+1,y+1,width-1,height-1);
+        this.fillRect(x,y,width,height);
 
         if (level < 8) {
-            var w = width/2-1,
-                h = height/2-1;
+            var w = width/2,
+                h = height/2;
 
             // nw
-            this.setTimeout(function() { this.doQuad(x+1,y+1,w-1,h-1,level+1); }.bind(this),this.randomInt(500));
+            this.setTimeout(function() { this.doQuad(x,y,w,h,level+1); }.bind(this),this.randomInt(500));
             // ne
-            this.setTimeout(function() { this.doQuad(x+w+1,y+1,w-1,h-1,level+1); }.bind(this),this.randomInt(500));
+            this.setTimeout(function() { this.doQuad(x+w,y,w,h,level+1); }.bind(this),this.randomInt(500));
             // sw
-            this.setTimeout(function() { this.doQuad(x+1,y+h+1,w-1,h-1,level+1); }.bind(this),this.randomInt(500));
+            this.setTimeout(function() { this.doQuad(x,y+h,w,h,level+1); }.bind(this),this.randomInt(500));
             // se
-            this.setTimeout(function() { this.doQuad(x+1+w,y+h+1,w-1,h-1,level+1); }.bind(this),this.randomInt(500));
+            this.setTimeout(function() { this.doQuad(x+w,y+h,w,h,level+1); }.bind(this),this.randomInt(500));
         }
     },
 
@@ -82,7 +64,7 @@ Composition28.prototype = _.extend(clone(Composition.prototype), {
     },
 
     runFunc : function() {
-        this.drawRects();
+        //this.drawRects();
 
         this.flag = !this.flag;
 
