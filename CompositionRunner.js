@@ -10,7 +10,7 @@ var CompositionRunner = {
         document.head.appendChild(fileref);
     },
 
-    getCanvas : function() { 
+    getCanvas : function() {
         var canvas = document.getElementById("myCanvas");
         return canvas;
     },
