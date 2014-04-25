@@ -24,12 +24,12 @@ Composition.nextObjectName = function(){
 
 Composition.prototype = {
     objectExpr : function() {
-        return "Composition.objects['" + this.objectName + "']";  
+        return "Composition.objects['" + this.objectName + "']";
     },
 
     getColor : function() {
         var col = this.colors[this.idx++];
-        if (this.idx == this.colors.length) { 
+        if (this.idx == this.colors.length) {
             this.idx = 0;
             this.colors.reverse();
         }
@@ -78,7 +78,7 @@ Composition.prototype = {
             color = '#111111';
         }
         this.ctx.fillStyle=color;
-        this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height);    
+        this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height);
     },
 
     each : function(f) {
@@ -120,10 +120,10 @@ Composition.prototype = {
         this.ctx.fillRect(x1,y1,x2,y2);
     },
 
-    strokeRect : function(x1, y1, x2, y2, color) {
+    strokeRect : function(x1, y1, x2, y2, color, width) {
         color = this.getColorOrDefault(color);
         this.ctx.strokeStyle = color;
-        this.ctx.lineWidth = 1;
+        this.ctx.lineWidth = width || 1;
         this.ctx.strokeRect(x1,y1,x2,y2);
     },
 
@@ -135,14 +135,14 @@ Composition.prototype = {
     },
 
     fillCircle : function(x,y,size,color) {
-        color = this.getColorOrDefault(color);    
+        color = this.getColorOrDefault(color);
         this.ctx.fillStyle=color;
         this.circle(x,y,size);
         this.ctx.fill();
     },
 
     strokeCircle : function(x,y,size,width,color) {
-        color = this.getColorOrDefault(color);    
+        color = this.getColorOrDefault(color);
         this.ctx.strokeStyle=color;
         this.ctx.lineWidth = width;
         this.circle(x,y,size);

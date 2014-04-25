@@ -10,7 +10,7 @@ Composition29.prototype = _.extend(clone(Composition.prototype), {
             vertLines = [];
 
         this.lineWidth = 20,
-        this.padding = 2; 
+        this.padding = 2;
 
         this.vertColor = '#666';
         this.horizColor = '#ccc';
@@ -80,7 +80,7 @@ Composition29.prototype = _.extend(clone(Composition.prototype), {
             return this.fcolors[this.cidx--];
     },
 
-    runFunc: function(i) {        
+    runFunc: function(i) {
         var line = this.order[i];
 
         if (!line) {
@@ -98,7 +98,7 @@ Composition29.prototype = _.extend(clone(Composition.prototype), {
         } else {
             this.fillRect(line[1] * this.lineWidth + p, p, this.lineWidth - p, this.height - p, c);
         }
-        
+
         this.setTimeout(function() {
             if (this.order.length > i+1)
                 this.runFunc(i+1);

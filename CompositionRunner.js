@@ -1,5 +1,5 @@
 var CompositionRunner = {
-    files : _.difference(_.range(1, 29 + 1), [1,2,8,9,10,22]),
+    files : _.difference(_.range(1, 30 + 1), [1,2,8,9,10,22]),
     objs : {},
     exclusive : true,
 
