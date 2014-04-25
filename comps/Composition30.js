@@ -6,6 +6,7 @@ function Composition30(ctx) {
 
 Composition30.prototype = _.extend(clone(Composition.prototype), {
     run : function() {
+        this.blank('#fff');
         var startY = 20;
         var side = Math.floor(this.height - 40);
         var startX = Math.floor(Math.abs(this.width - this.height)/2);
