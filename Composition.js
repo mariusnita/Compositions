@@ -193,18 +193,29 @@ Composition.prototype = {
         console.log('Run method needs to be overridden.');
     },
 
-    stop : function() {
+    clearTimeouts : function() {
         for (var x = 0; x < this.timeouts.length; ++x) {
             clearTimeout(this.timeouts[x]);
         }
+        this.timeouts = [];
+    },
 
-        for (x = 0; x < this.events.length; ++x) {
+    clearListeners : function() {
+        for (var x = 0; x < this.events.length; ++x) {
             this.canvas.removeEventListener(this.events[x].name, this.events[x].callback);
         }
+        this.events = [];
+    },
 
+    pause : function() {
+        this.clearTimeouts();
+        this.stopped = true;
+    },
+
+    stop : function() {
+        this.clearTimeouts();
+        this.clearListeners();
         this.stopped = true;
         this.idx = 0;
-        this.timeouts = [];
-        this.events = [];
     }
 };

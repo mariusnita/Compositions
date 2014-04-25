@@ -37,19 +37,19 @@ var FocalUI = (function() {
         if (!opts.nomenu)
             return;
         menuShown = false;
-        setTimeout(function() { 
-            if (!menuShown) { 
+        setTimeout(function() {
+            if (!menuShown) {
                 menuHideRaw();
-            } 
+            }
         }, 500);
     }
 
     function startStop() {
-        if (started) { 
-            anim.stop(); 
+        if (started) {
+            anim.pause();
         }
-        else { 
-            anim.run(); 
+        else {
+            anim.run();
         }
 
         started = !started;
@@ -112,7 +112,7 @@ var FocalUI = (function() {
 
         $(document).on('mouseenter', '.first,.hid', menuShow);
         $(document).on('mouseleave', '.first,.hid', menuHide);
-        
+
         $(document).on('keydown',document,function(evt) {
             switch (evt.keyCode) {
             case 83: return startStop(); // p
@@ -131,6 +131,7 @@ var FocalUI = (function() {
     $(document).ready(initialize);
 
     return {
+        getAnim : function() { return anim; },
         restart : restart,
         cols : cols,
         startStop : startStop,
