@@ -12,6 +12,11 @@ function clone(obj) {
     }
 }
 
+function extend(obj, props) {
+    var newObj = Object.create(obj.prototype);
+    return _.extend(newObj, props);
+}
+
 /* Use: "{0}, {1}".format('Hello', 'world'); */
 if (typeof String.prototype.format !== 'function') {
     String.prototype.format = function() {
