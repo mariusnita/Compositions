@@ -5,8 +5,8 @@
  */
 function clone(obj) {
     if (typeof obj !== 'undefined') {
-	clone.prototype = Object(obj);
-	return new clone;
+        clone.prototype = Object(obj);
+        return new clone;
     } else {
         return undefined;
     }
