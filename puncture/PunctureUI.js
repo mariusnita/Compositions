@@ -55,7 +55,7 @@ var KeyCatcher = (function() {
                to the surface. */
             if (KeyCatcher.pressed()) {
                 var newPoint = composite.polygon.duplicatePoint(point);
-                setupKnob(newPoint);
+                setupKnob(composite, newPoint);
             }
         });
 
