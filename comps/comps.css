@@ -1,4 +1,4 @@
-a { color: #ccc; cursor: pointer; }
+a { color: #ccc; cursor: pointer; text-decoration: none; }
 
 html {
     padding: 0;
@@ -17,7 +17,7 @@ body {
 .control {
     position: fixed;
     z-index: 2;
-    background-color: rgba(60,60,60,0.9);
+    background-color: rgba(97, 184, 255, 0.48);
     padding: 10px;
     padding-top: 10px;
     left: 50%;
@@ -30,7 +30,8 @@ body {
     cursor: pointer;
     width: 30px;
     margin: 4px;
-    color: #ddd;
+    color: rgb(242, 253, 255);
+    text-shadow: 1px 1px #5d939b;
     font-family: helvetica;
     font-size: 12px;
     float: left;
