@@ -17,7 +17,7 @@ var MainUI = {
         var html = [];
 
         _.each(CompositionRunner.files, function(file) {
-            CompositionRunner.loadJs('comps/Composition{0}.js'.format(file));
+            CompositionRunner.loadJs('src/Composition{0}.js'.format(file));
             html.push('<div id="c{0}" class="but" onclick="MainUI.runComposition({0})">{0}</div>'.format(file));
         });
 

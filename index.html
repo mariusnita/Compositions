@@ -1,11 +1,86 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
+    <title>Marius Niță</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <link rel="stylesheet" href="index.css" type="text/css" />
+
+    <script type="text/javascript" src="lib/underscore-min.js"></script>
+    <script type="text/javascript" src="lib/jquery-min.js"></script>
+    <script type="text/javascript" src="Util.js"></script>
+    <script type="text/javascript" src="Composition.js"></script>
+    <script type="text/javascript" src="CompositionSquare.js"></script>
+    <script>
+      $().ready(function() {
+          new CompositionSquare(document.getElementById('myCanvas')).run();
+      });
+    </script>
   </head>
+
   <body>
-      <a href="main.html">Main</a><br/>
-      <a href="focal">Focal</a><br/>
-      <a href="mondrian">Mondrian</a><br/>
-      <a href="puncture">Puncture</a>
+
+    <div style="padding: 5px; text-align: center;">
+
+      <div class="project">
+        <h2>Mondrian</h2>
+
+        <p>Mondrian is an interaction that allows creating visual
+          compositions in a visual language similar to the signature
+          language of the late
+          <a target="_new" href="http://en.wikipedia.org/wiki/Piet_Mondrian">Piet
+            Mondrian</a>.</p>
+
+        <p>
+          <a href="mondrian/">
+            <img src="img/mondrian_thumb.png"/>
+          </a>
+        </p>
+      </div>
+
+      <div class="project">
+        <h2>Focal</h2>
+
+        <p>Focal is an interactive visual language. It is based on a set
+          of wandering points in the style of an Etch A Sketch and various
+          relationships between these points and the mouse cursor,
+          relationships which can be dynamically changed, making for a fun
+          interaction that can create beautiful images.</p>
+
+        <p>
+          <a href="focal/">
+            <img src="img/focal_thumb.jpg"/>
+          </a>
+        </p>
+      </div>
+      <br/>
+      <div class="project">
+        <h2>Compositions</h2>
+
+        <p>A larger set of non-interactive animations based on the Composition
+          Framework.</p>
+
+        <p>
+          <a href="main.html">
+            <canvas id="myCanvas" width="200" height="200"></canvas>
+          </a>
+        </p>
+      </div>
+
+      <div class="project">
+        <h2>Composition Framework</h2>
+
+        <p>Composition is a Javascript-based animation
+          framework. All the projects on this page are in some way based
+          on Composition. There is a
+          tiny <a target="_new" href="https://github.com/mariusnita/Compositions/blob/master/Composition.js">base
+            class</a> that can be subclassed to animate in a Javascript
+          canvas
+          element. <a target="_new" href="https://github.com/mariusnita/Compositions/blob/master/comps/Composition11.js">Example</a>.</p>
+
+        <p>The source code for all the projects on this page
+          is <a target="_new" href="https://github.com/mariusnita/Compositions">available on Github</a>.</p>
+      </div>
+    </div>
   </body>
 </html>
