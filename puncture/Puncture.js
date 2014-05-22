@@ -84,7 +84,7 @@ Composite.prototype = extend(Composition, {
             for (var y = bounds.minY; y < bounds.maxY; ++y) {
                 var idx = (y * this.width + x) * 4;
                 /* p1 and p2 defines a line from the (0,0) corner to the current pixel */
-                var p1 = {x:0, y:0},
+                var p1 = {x:50, y:0},
                     p2 = {x:x, y:y};
 
                 var intersectCount = 0;

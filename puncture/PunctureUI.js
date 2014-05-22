@@ -5,13 +5,13 @@ var KeyCatcher = (function() {
     var modifierPressed = false;
 
     $(document).keydown(function(e) {
-        if (e.keyCode === 91) {
+        if (e.keyCode === 18) {
             modifierPressed = true;
         }
     });
 
     $(document).keyup(function(e) {
-        if (e.keyCode === 91) {
+        if (e.keyCode === 18) {
             modifierPressed = false;
         }
     });
