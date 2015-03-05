@@ -1,65 +1,63 @@
-function Composition24(ctx) {
+(function(extend, Composition) {
+  function Composition24(ctx) {
     Composition.call(this, ctx);
-}
+  }
 
-Composition24.prototype = clone(Composition.prototype);
+  Composition24.prototype = extend(Composition, {
+    perturbPoint: function(p) {
+      var rx = Math.random()/5;
+      var ry = Math.random()/5;
 
-Composition24.prototype.runFunc = function() {
+      if (p.x > this.width/2) {
+        p.flipX = true;
+      }
+      if (p.x < this.width/2) {
+        p.flipX = false;
+      }
 
-    //console.log(this.x, this.y);
-    var rx = Math.random()/5;
-    var ry = Math.random()/5;
+      if (p.y > this.height/2) {
+        p.flipY = true;
+      }
+      if (p.y < this.height/2) {
+        p.flipY = false;
+      }
 
-    if (this.x > this.width/2) {
-        this.flip_x = true;
+      //console.log(this.flipX, this.flipY);
+      
+      if (!p.flipX) {
+        p.momentumX += rx;
+      } else {
+        p.momentumX -= rx;
+      }
+
+      if (!p.flipY) {
+        p.momentumY += ry;
+      } else {
+        p.momentumY -= ry;
+      }
+
+      p.x += p.momentumX;
+      p.y += p.momentumY;
+    },
+    runFunc: function(p) {
+      this.perturbPoint(p);
+      this.drawLine(p.x,p.y,p.x + p.momentumX,p.y + p.momentumY,"black",2);
+      this.setTimeout(function() {
+        this.runFunc(p);
+      }.bind(this));
+    },
+    run: function() {
+      this.blank("white");
+      var p = {
+        x: Math.random()*this.width,
+        y: Math.random()*this.height,
+        momentumX: 1,
+        momentumY: 1,
+        flipX: false,
+        flipY: false
+      };
+      this.runFunc(p);
     }
-    if (this.x < this.width/2) {
-        this.flip_x = false;
-    }
-
-    if (this.y > this.height/2) {
-        this.flip_y = true;
-    }
-    if (this.y < this.height/2) {
-        this.flip_y = false;
-    }
-
-    //console.log(this.flip_x, this.flip_y);
-    
-    if (!this.flip_x) {
-        this.momentum_x += rx;
-    } else {
-        this.momentum_x -= rx;
-    }
-
-    if (!this.flip_y) {
-        this.momentum_y += ry;
-    } else {
-        this.momentum_y -= ry;
-    }
-
-    this.drawLine(this.x,this.y,this.x + this.momentum_x,this.y + this.momentum_y,'black',2);
-
-    this.x += this.momentum_x;
-    this.y += this.momentum_y;
-
-    //this.fillCircle(this.x,this.y,5,'black');
-
-    this.setTimeout(this.runFunc.bind(this));
-};
-
-Composition24.prototype.run0 = function() {
-    this.x = Math.random()*this.width;
-    this.y = Math.random()*this.height;
-    this.momentum_x = 1;
-    this.momentum_y = 1;
-    this.flip_x = false;
-    this.flip_y = false;
-
-    this.runFunc();
-};
-
-Composition24.prototype.run = function() {
-    this.blank('white');
-    this.run0();
-};
+  });
+  window.Composition24 = Composition24;
+})(window.extend, window.Composition);
