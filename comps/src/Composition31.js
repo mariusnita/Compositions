@@ -29,9 +29,9 @@
         }
       }
       this.ctx.putImageData(imageData, 0, 0);
-      // points.forEach(function(p) {
-      //   this.fillCircle(p.x, p.y, 4, "white");
-      // }.bind(this));
+      points.forEach(function(p) {
+        this.fillCircle(p.x, p.y, 4, "white");
+      }.bind(this));
       this.movePoints(points);
       this.setTimeout(function() {
         this.step(points, imageData);
